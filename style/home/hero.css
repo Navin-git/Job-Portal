@@ -1,0 +1,57 @@
+
+.hero{
+     padding: 80px 10px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     gap: 20px;
+     background-color: rgb(242,246,255);
+}
+
+.hero h1{
+     font-weight: 900;
+}
+
+.hero h4 {
+     font-weight: 600;
+}
+
+.search-job {
+     display: flex;
+     gap:20px;
+     align-items: center;
+}
+
+.search-job:first-child{
+     width: 500px;
+}
+
+.search-job input{
+     padding: 20px;
+     font-size: medium;
+     font-weight: 600;
+     border: none;
+     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+     outline: none;
+}
+
+#job-title{
+     width: 400px;
+}
+
+#location{
+     width: 300px;
+}
+
+.search-btn{
+     background: #F03737;
+     padding: 20px 30px;
+     font-size: medium;
+     color: #fff;
+     border-radius: 5px;
+     font-weight: 600;
+     border: none;
+     cursor: pointer;
+     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Portal</title>
+    <link rel="stylesheet" href="./style/index.css" />
+    <link rel="stylesheet" href="./style/home/job-list.css" />
+    <script
+      src="https://kit.fontawesome.com/0eca523b09.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <div>
+        <img
+          class="logo"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
+          alt="logo"
+        />
+        <ul>
+          <li>
+            <a style="color: black" href="./web/about.html">Log in</a>
+          </li>
+          <li>
+            <button class="btn">
+              <a style="color: white" href="./web/about.html">Sign up</a>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <section style="padding: 40px 20px">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <h1>Applied jobs</h1>
+      </div>
+      <div id="job-list" class="job-list"></div>
+    </section>
+    <footer>
+      <img
+        class="logo"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
+        alt="logo"
+      />
+      <h1>Job Portal<span style="color: blue">:</span></h1>
+      <p>We offer thousands of jobs vacancies right now</p>
+      <p style="font-size: 14px">
+        Copyright © 2023 job portal. All rights reserved.
+      </p>
+    </footer>
+    <script>
+      const jobList = document.getElementById("job-list");
+      console.log(jobList);
+      [1, 2, 3, 4, 5].map((date, index) => {
+        console.log("hello");
+        jobList.innerHTML += ` <div class="job-card">
+          <div
+            style="
+              display: flex;
+              gap: 10px;
+              align-items: center;
+              padding: 0 20px;
+            "
+          >
+            <img
+              src="https://photos.wellfound.com/startups/i/90183-bed46f22aafe8af7dc65cdd73fff2f76-medium_jpg.jpg?buster=1620918177"
+              alt=""
+              style="width: 50px; border-radius: 5px"
+            />
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 0 20px;
+              "
+            >
+              <h4>Discord</h4>
+              <p>501-1000 employees</p>
+            </div>
+          </div>
+          <p style="padding: 0 20px">
+            Our mission is to create a world where everyone has access to the
+            food they love and more
+          </p>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              padding: 0 20px;
+            "
+          >
+            <div style="display: flex; gap: 10px;">Salary: <span class="tag">55000</span></div>
+            <div style="display: flex; gap: 10px;">Job Tab: <span class="tag">full time</span></div>
+            <div>Post date: 2022-05-05</div>
+          </div>
+          <div class="job-card-review">
+            <span>40 Open Position</span>
+            <div class="tag">${
+              index % 3 === 0
+                ? "PROCESS"
+                : index % 2 === 0
+                ? "ACCEPTED"
+                : "REJECTED"
+            }</div>
+          </div>
+        </div>`;
+        return;
+      });
+    </script>
+  </body>
+</html>
