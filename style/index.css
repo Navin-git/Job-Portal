@@ -88,6 +88,7 @@ nav a{
      font-size: medium;
      cursor: pointer;
      width: fit-content;
+     text-decoration: none;
 }
 
 footer{
