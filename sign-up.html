@@ -55,16 +55,62 @@
 
           <div class="login-form">
             <form action="">
-              <input type="text" placeholder="Full Name" />
-              <input type="email" placeholder="E-mail Address" />
-              <input type="number" placeholder="Phone No." />
-              <input type="password" placeholder="Password" />
-              <input type="password" placeholder="Comfirm Password" />
+              <input id="FullName" type="text" placeholder="Full Name" />
+              <input id="Email" type="email" placeholder="E-mail Address" />
+              <input id="PhoneNumber" type="number" placeholder="Phone No." />
+              <input id="Password" type="password" placeholder="Password" />
+              <input
+                id="ComfirmPassword"
+                type="password"
+                placeholder="Comfirm Password"
+              />
               <button style="margin-left: auto" class="btn">Sign up</button>
             </form>
           </div>
         </div>
       </div>
     </div>
+    <script>
+      const FullName = document.getElementById("FullName");
+      const Email = document.getElementById("Email");
+      const PhoneNumber = document.getElementById("PhoneNumber");
+      const Password = document.getElementById("Password");
+      const ComfirmPassword = document.getElementById("ComfirmPassword");
+      let input = {};
+      FullName.addEventListener("change", (e) => {
+        input.FullName = e.target.value;
+      });
+      Email.addEventListener("change", (e) => {
+        input.Email = e.target.value;
+      });
+      PhoneNumber.addEventListener("change", (e) => {
+        input.PhoneNumber = e.target.value;
+      });
+      Password.addEventListener("change", (e) => {
+        input.Password = e.target.value;
+      });
+      ComfirmPassword.addEventListener("change", (e) => {
+        input.ComfirmPassword = e.target.value;
+      });
+
+      async function postData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+      postData("https://example.com/answer", input).then((data) => {
+        console.log(data); // JSON data parsed by `data.json()` call
+      });
+    </script>
   </body>
 </html>

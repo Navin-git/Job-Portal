@@ -62,7 +62,119 @@
           </select>
         </div>
       </div>
-      <div id="job-list" class="job-list"></div>
+      <div id="job-list" class="job-list">
+        <div class="job-detail">
+          <button id="show-less" class="show-detail"><</button>
+          <div
+            style="
+              overflow-y: scroll;
+              height: calc(100vh);
+              padding: 80px 20px 20px 20px;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+              class="profile-img-card"
+            >
+              <div style="display: flex; align-items: center; gap: 20px">
+                <div>
+                  <img
+                    src="https://images-eds-ssl.xboxlive.com/image?url=Q_rwcVSTCIytJ0KOzcjWTYl.n38D8jlKWXJx7NRJmQKBAEDCgtTAQ0JS02UoaiwRCHTTX1RAopljdoYpOaNfVf5nBNvbwGfyR5n4DAs0DsOwxSO9puiT_GgKqinHT8HsW8VYeiiuU1IG3jY69EhnsQ--&format=source"
+                    alt=""
+                    style="width: 60px; height: auto"
+                  />
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 3px">
+                  <h4>Disacord</h4>
+                  <p>IT Company</p>
+                  <p>Pokhara</p>
+                </div>
+              </div>
+              <button class="btn">Apply</button>
+            </div>
+            <br />
+            <div style="display: flex; gap: 20px">
+              <div>
+                <h5>Posted date</h5>
+                <p>2022-07-06</p>
+              </div>
+              <div>
+                <h5>Due date</h5>
+                <p>2022-07-10</p>
+              </div>
+            </div>
+            <br />
+            <h3>Requiring C# Developer</h3>
+            <br />
+            <p>
+              I have 40 products that I would like the thumbnails updated for in
+              my Teachers Pay Teachers store. You would be added as a team
+              member of my store on TPT, and need to review the product, and
+              then create a cover image and three thumbnails for the product. I
+              have a bunch of clipart I can also share with you that you are
+              free to use. I would like the thumbnails to match the color scheme
+              in my current logo and banner. Otherwise, I'm open to your design
+              vision and seeing what you can come up with. A sample of what I'm
+              looking for is linked here. Note that it features screenshots of
+              the actual product layered in the background, a main clipart image
+              on the left, and text along the top. The second and third
+              thumbnails are more screenshots of layered pages, and the third
+              screenshot is one sample page full-size.
+              https://www.teacherspayteachers.com/Product/Spring-Math-and-Literacy-Packet-NO-PREP-Kindergarten-1128712?st=f2146886df69e7d407c355d486fb2099
+              I've attached a sample thumbnail I created that I like; however,
+              the picture came out grainy as I was copying it from a Google
+              Slide, and the font ends up being hard to read on the TPT listing.
+            </p>
+            <br />
+            <h4>Industry</h4>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                margin-top: 10px;
+                flex-direction: column;
+              "
+            >
+              <p>IT industry</p>
+            </div>
+            <br />
+            <h4>Skills</h4>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                margin-top: 10px;
+                font-size: large;
+              "
+            >
+              <div class="tag">C#</div>
+              <div class="tag">.NET</div>
+            </div>
+            <br />
+            <h4>Requirements</h4>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                margin-top: 10px;
+                flex-direction: column;
+              "
+            >
+              <p>1-2 years of sales experience.</p>
+              <p>
+                A background in management, with a minimum of 2 years in a
+                management role.
+              </p>
+              <p>Proven success as a developer.</p>
+              <p>Experience directing projects and delegating tasks.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <footer>
       <img
@@ -132,6 +244,30 @@
           return;
         }
       );
+    </script>
+    <script>
+      const jobCard = document.getElementsByClassName("job-card");
+      const jobDetail = document.getElementsByClassName("job-detail");
+      const showLess = document.getElementById("show-less");
+      let isDetailOpen = false;
+      showLess.addEventListener("click", () => {
+        isDetailOpen = false;
+        jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
+        showLess.style.display = "none";
+      });
+      for (let i = 0; i < jobCard.length; i++) {
+        jobCard[i].addEventListener("click", () => {
+          console.log(jobDetail);
+          isDetailOpen = !isDetailOpen;
+          jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
+          showLess.style.display = "flex";
+        });
+      }
+      if (isDetailOpen) {
+        showLess.style.display = "flex";
+      } else {
+        showLess.style.display = "none";
+      }
     </script>
   </body>
 </html>
