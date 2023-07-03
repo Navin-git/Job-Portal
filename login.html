@@ -106,8 +106,15 @@
 
       SignIn.addEventListener("submit", (e) => {
         e.preventDefault();
-        postData("https://example.com/answer", input).then((data) => {
+        postData(
+          `http://localhost:9000/${Company ? "CompanyLogin" : "login"}`,
+          input
+        ).then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
+          window.localStorage.setItem(JSON.stringify(data));
+          window.location.pathname = Company
+            ? "/dashboard/job-post.html"
+            : "/index.html";
         });
       });
     </script>
