@@ -112,7 +112,7 @@
 
       Signup.addEventListener("submit", (e) => {
         e.preventDefault();
-        postData("http://localhost:9000/login", input).then((data) => {
+        postData("http://localhost:9000/signin", input).then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
           window.location.pathname = "/login";
         });
