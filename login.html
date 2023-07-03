@@ -109,9 +109,9 @@
         postData(
           `http://localhost:9000/${Company ? "CompanyLogin" : "login"}`,
           input
-        ).then((data) => {
-          console.log(data); // JSON data parsed by `data.json()` call
-          window.localStorage.setItem(JSON.stringify(data));
+        ).then((res) => {
+          console.log(res?.data); // JSON res?.data parsed by `res?.data.json()` call
+          window.localStorage.setItem(JSON.stringify(res?.data));
           window.location.pathname = Company
             ? "/dashboard/job-post.html"
             : "/index.html";
