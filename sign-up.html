@@ -54,7 +54,7 @@
           </p>
 
           <div class="login-form">
-            <form action="">
+            <form id="sign-up" action="">
               <input id="FullName" type="text" placeholder="Full Name" />
               <input id="Email" type="email" placeholder="E-mail Address" />
               <input id="PhoneNumber" type="number" placeholder="Phone No." />
@@ -76,6 +76,7 @@
       const PhoneNumber = document.getElementById("PhoneNumber");
       const Password = document.getElementById("Password");
       const ComfirmPassword = document.getElementById("ComfirmPassword");
+      const Signup = document.getElementById("sign-up");
       let input = {};
       FullName.addEventListener("change", (e) => {
         input.FullName = e.target.value;
@@ -108,8 +109,12 @@
         });
         return response.json();
       }
-      postData("https://example.com/answer", input).then((data) => {
-        console.log(data); // JSON data parsed by `data.json()` call
+
+      Signup.addEventListener("submit", (e) => {
+        e.preventDefault();
+        postData("https://example.com/answer", input).then((data) => {
+          console.log(data); // JSON data parsed by `data.json()` call
+        });
       });
     </script>
   </body>
