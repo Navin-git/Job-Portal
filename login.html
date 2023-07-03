@@ -85,7 +85,7 @@
         input.Password = e.target.value;
       });
       Company.addEventListener("change", (e) => {
-        input.Password = e.target.value;
+        input.Password = e.target.checked;
       });
 
       async function postData(url = "", data = {}) {
