@@ -55,17 +55,68 @@
 
           <div class="login-form">
             <form action="">
-              <input type="text" placeholder="Company name" />
-              <input type="email" placeholder="E-mail Address" />
-              <input type="email" placeholder="Company Address" />
-              <input type="email" placeholder="Industry" />
-              <input type="password" placeholder="Password" />
-              <input type="password" placeholder="Comfirm Password" />
+              <input id="CompanyName" type="text" placeholder="Company name" />
+              <input id="Email" type="email" placeholder="E-mail Address" />
+              <input id="Address" type="email" placeholder="Company Address" />
+              <input id="Industry" type="email" placeholder="Industry" />
+              <input id="Password" type="password" placeholder="Password" />
+              <input
+                id="ComfirmPassword"
+                type="password"
+                placeholder="Comfirm Password"
+              />
               <button style="margin-left: auto" class="btn">Sign up</button>
             </form>
           </div>
         </div>
       </div>
     </div>
+    <script>
+      const CompanyName = document.getElementById("CompanyName");
+      const Email = document.getElementById("Email");
+      const PhoneNumber = document.getElementById("PhoneNumber");
+      const Password = document.getElementById("Password");
+      const ComfirmPassword = document.getElementById("ComfirmPassword");
+      const Signup = document.getElementById("sign-up");
+      let input = {};
+      CompanyName.addEventListener("change", (e) => {
+        input.CompanyName = e.target.value;
+      });
+      Email.addEventListener("change", (e) => {
+        input.Email = e.target.value;
+      });
+      PhoneNumber.addEventListener("change", (e) => {
+        input.PhoneNumber = e.target.value;
+      });
+      Password.addEventListener("change", (e) => {
+        input.Password = e.target.value;
+      });
+      ComfirmPassword.addEventListener("change", (e) => {
+        input.ComfirmPassword = e.target.value;
+      });
+
+      async function postData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+
+      Signup.addEventListener("submit", (e) => {
+        e.preventDefault();
+        postData("https://example.com/answer", input).then((data) => {
+          console.log(data); // JSON data parsed by `data.json()` call
+        });
+      });
+    </script>
   </body>
 </html>
