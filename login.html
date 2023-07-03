@@ -85,7 +85,7 @@
         input.Password = e.target.value;
       });
       Company.addEventListener("change", (e) => {
-        input.Password = e.target.checked;
+        input.Company = e.target.checked;
       });
 
       async function postData(url = "", data = {}) {
@@ -107,12 +107,12 @@
       SignIn.addEventListener("submit", (e) => {
         e.preventDefault();
         postData(
-          `http://localhost:9000/${Company ? "CompanyLogin" : "login"}`,
+          `http://localhost:9000/${input.Company ? "CompanyLogin" : "login"}`,
           input
         ).then((res) => {
           console.log(res); // JSON res parsed by `res.json()` call
           window.localStorage.setItem("user", JSON.stringify(res));
-          window.location.pathname = Company
+          window.location.pathname = input.Company
             ? "/dashboard/job-post.html"
             : "/index.html";
         });
