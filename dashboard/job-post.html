@@ -53,21 +53,30 @@
       <section style="padding: 20px">
         <h3>Add Job</h3>
         <br />
-        <div class="profile-form">
+        <form id="form" action="" class="profile-form">
           <div class="input-div">
-            <label for="">Title</label>
-            <input type="text" name="" id="" />
-            <p></p>
+            <label for="Title">Title</label>
+            <input type="text" name="" id="Title" />
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="Title-error"
+            ></p>
           </div>
           <div class="input-div">
-            <label for="">Job Industry</label>
-            <input type="text" name="" id="" />
-            <p></p>
+            <label for="Job-Industry">Job Industry</label>
+            <input type="text" name="" id="Job-Industry" />
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="Job-Industr-error"
+            ></p>
           </div>
           <div class="input-div">
-            <label for="">Open Vacancy</label>
-            <input type="text" name="" id="" />
-            <p></p>
+            <label for="Open-Vacancy">Open Vacancy</label>
+            <input type="text" name="" id="Open-Vacancy" />
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="Open-Vacancy-error"
+            ></p>
           </div>
           <div class="input-div">
             <label for="">Type</label>
@@ -81,46 +90,72 @@
               name=""
               class="custom-select"
               placeholder="Location"
-              id=""
+              id="job_type"
             >
               <option value="">Location</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Full Time">Full Time</option>
             </select>
-            <p></p>
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="custom-select-error"
+            ></p>
           </div>
           <div class="input-div">
-            <label for="">Salary</label>
-            <input type="text" name="" id="" />
-            <p></p>
+            <label for="Salary">Salary</label>
+            <input type="number" name="" id="Salary" />
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="Salary-error"
+            ></p>
           </div>
           <div class="input-div">
-            <label for="">Due Date</label>
-            <input type="text" name="" id="" />
-            <p></p>
+            <label for="Due-Date">Due Date</label>
+            <input type="date" name="" id="Due-Date" />
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="Due-Date-error"
+            ></p>
           </div>
           <div class="input-div">
-            <label for="">Job Expirence</label>
-            <input type="text" name="" id="" />
-            <p></p>
+            <label for="Job-Expirence">Job Expirence</label>
+            <input type="text" name="" id="Job-Expirence" />
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="Job-Expirence-error"
+            ></p>
           </div>
           <div class="input-div">
-            <label for="">Skill</label>
-            <input type="text" name="" id="" />
-            <p></p>
+            <label for="Skill">Skill</label>
+            <input type="text" name="" id="Skill" />
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="Skill-error"
+            ></p>
           </div>
           <div class="input-div">
-            <label for="">Education Requirement</label>
-            <input type="text" name="" id="" />
-            <p></p>
+            <label for="Education-Requirement">Education Requirement</label>
+            <input type="text" name="" id="Education-Requirement" />
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="Education-Requirement-error"
+            ></p>
           </div>
           <div class="input-div">
-            <label for="">Role</label>
-            <input type="text" name="" id="" />
-            <p></p>
+            <label for="Role">Role</label>
+            <input type="text" name="" id="Role" />
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="Role-error"
+            ></p>
           </div>
           <div class="input-div">
-            <label for="">Job Description</label>
-            <textarea name="" id=""> </textarea>
-            <p></p>
+            <label for="Job-Description">Job Description</label>
+            <textarea name="" id="Job-Description"> </textarea>
+            <p
+              style="font-size: small; margin-left: 10px; color: red"
+              id="Job-Description-error"
+            ></p>
           </div>
 
           <button
@@ -134,8 +169,140 @@
           >
             Submit
           </button>
-        </div>
+        </form>
       </section>
     </div>
+    <script>
+      const Title = document.getElementById("Title");
+      const Job_Industry = document.getElementById("Job-Industry");
+      const Open_Vacancy = document.getElementById("Open-Vacancy");
+      const Due_Date = document.getElementById("Due-Date");
+      const Job_Expirence = document.getElementById("Job-Expirence");
+      const Skill = document.getElementById("Skill");
+      const Role = document.getElementById("Role");
+      const Salary = document.getElementById("Salary");
+      const Job_Description = document.getElementById("Job-Description");
+      const Job_Type = document.getElementById("job_type");
+      const Education_Requirement = document.getElementById(
+        "Education-Requirement"
+      );
+      const Title_error = document.getElementById("Title-error");
+      const Due_Date_error = document.getElementById("Due-Date-error");
+      const Salary_error = document.getElementById("Salary-error");
+      const Job_Description_error = document.getElementById(
+        "Job-Description-error"
+      );
+      const Job_Industry_error = document.getElementById("Job-Industr-error");
+      // const FullName_error = document.getElementById("FullName-error");
+      // const PhoneNumber_error = document.getElementById("PhoneNumber-error");
+      // const Password_error = document.getElementById("Password-error");
+      // const ComfirmPassword_error = document.getElementById(
+      //   "ComfirmPassword-error"
+      // );
+      const Profile_form = document.getElementById("form");
+      let input = {};
+      Title.addEventListener("change", (e) => {
+        input.Title = e.target.value;
+      });
+      Job_Industry.addEventListener("change", (e) => {
+        input.Job_Industry = e.target.value;
+      });
+      Open_Vacancy.addEventListener("change", (e) => {
+        input.Open_Vacancy = e.target.value;
+      });
+      Due_Date.addEventListener("change", (e) => {
+        input.Due_Date = e.target.value;
+      });
+      Job_Expirence.addEventListener("change", (e) => {
+        input.Job_Expirence = e.target.value;
+      });
+      Skill.addEventListener("change", (e) => {
+        input.Skill = e.target.value;
+      });
+      Role.addEventListener("change", (e) => {
+        input.Role = e.target.value;
+      });
+      Job_Description.addEventListener("change", (e) => {
+        input.Job_Description = e.target.value;
+      });
+      Education_Requirement.addEventListener("change", (e) => {
+        input.Education_Requirement = e.target.value;
+      });
+      Job_Type.addEventListener("change", (e) => {
+        input.job_type = e.target.value;
+      });
+
+      async function postData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+
+      console.log(Profile_form);
+
+      Profile_form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!input.Title) {
+          Title_error.innerHTML = "Titleis required";
+          return;
+        } else {
+          Title_error.innerHTML = "";
+        }
+
+        if (!input.Job_Industry) {
+          Job_Industry_error.innerHTML = "Job Industry is required";
+          return;
+        } else {
+          Job_Industry_error.innerHTML = "";
+        }
+
+        if (!input.Due_Date) {
+          Due_Date_error.innerHTML = "Due Date is required";
+          return;
+        } else {
+          Due_Date_error.innerHTML = "";
+        }
+
+        if (!input.Job_Description) {
+          Job_Description_error.innerHTML = "Job Description is required";
+          return;
+        } else {
+          Job_Description_error.innerHTML = "";
+        }
+
+        if (!input.Salary) {
+          Salary_error.innerHTML = "Salary is required";
+          return;
+        } else {
+          Salary_error.innerHTML = "";
+        }
+        postData("http://localhost:9000/Jobs", {
+          JobTitle: input.title,
+          salary: input.salary,
+          jobType: input.job_type,
+          jobindustry: input.Job_Industry,
+          OpenVacency: input.Open_Vacancy,
+          jobDesc: input.Job_Description,
+          DueDate: input.Due_Date,
+          PostDate: new Date(),
+          JobExpirence: input.Job_Expirence,
+          skills: input.Skill,
+          Roles: input.Role,
+        }).then((data) => {
+          console.log(data); // JSON data parsed by `data.json()` call
+          window.location.pathname = "/dashboard/job-list.html";
+        });
+      });
+    </script>
   </body>
 </html>

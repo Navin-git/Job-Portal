@@ -41,8 +41,30 @@
             </button>
           </li>
         </ul>
+        <button id="menu">&#9776;</button>
       </div>
     </nav>
+    <aside class="m-nav">
+      <ul>
+        <li>
+          <a style="color: black" href="./applied.html">Applied Job</a>
+        </li>
+        <li>
+          <a style="color: black" href="./job-list.html">Job List</a>
+        </li>
+        <li>
+          <a style="color: black" href="./for-company.html">For Company</a>
+        </li>
+        <li>
+          <a style="color: black" href="./login.html">Log in</a>
+        </li>
+        <li>
+          <button class="btn">
+            <a style="color: white" href="./sign-up.html">Sign up</a>
+          </button>
+        </li>
+      </ul>
+    </aside>
     <section>
       <div class="hero">
         <h1>FIND THE JOB THAT FITS YOUR LIFE</h1>
@@ -61,6 +83,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
           "
         >
           <h1>Featured startups hiring now</h1>
@@ -490,5 +513,6 @@
         showLess.style.display = "none";
       }
     </script>
+    <script src="../script/nav.js"></script>
   </body>
 </html>

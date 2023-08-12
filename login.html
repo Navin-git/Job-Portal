@@ -35,8 +35,30 @@
             </button>
           </li>
         </ul>
+        <button id="menu">&#9776;</button>
       </div>
     </nav>
+    <aside class="m-nav">
+      <ul>
+        <li>
+          <a style="color: black" href="./applied.html">Applied Job</a>
+        </li>
+        <li>
+          <a style="color: black" href="./job-list.html">Job List</a>
+        </li>
+        <li>
+          <a style="color: black" href="./for-company.html">For Company</a>
+        </li>
+        <li>
+          <a style="color: black" href="./login.html">Log in</a>
+        </li>
+        <li>
+          <button class="btn">
+            <a style="color: white" href="./sign-up.html">Sign up</a>
+          </button>
+        </li>
+      </ul>
+    </aside>
     <div class="parent clearfix">
       <!-- <div class="bg-illustration">
         <div class="burger-btn">
@@ -56,8 +78,15 @@
           <div class="login-form">
             <form id="sign-in" action="">
               <input id="Email" type="email" placeholder="E-mail Address" />
+              <p
+                style="font-size: small; margin-left: 10px; color: red"
+                id="email-error"
+              ></p>
               <input id="Password" type="password" placeholder="Password" />
-
+              <p
+                style="font-size: small; margin-left: 10px; color: red"
+                id="password-error"
+              ></p>
               <div class="remember-form">
                 <input id="Company" type="checkbox" />
                 <span>Company</span>
@@ -77,6 +106,8 @@
       const Password = document.getElementById("Password");
       const Company = document.getElementById("Company");
       const SignIn = document.getElementById("sign-in");
+      const email_error = document.getElementById("email-error");
+      const password_error = document.getElementById("password-error");
       let input = {};
       Email.addEventListener("change", (e) => {
         input.Email = e.target.value;
@@ -106,6 +137,19 @@
 
       SignIn.addEventListener("submit", (e) => {
         e.preventDefault();
+        if (!input.Email) {
+          email_error.innerHTML = "Email is required";
+          return;
+        } else {
+          email_error.innerHTML = "";
+        }
+
+        if (!input.Password) {
+          password_error.innerHTML = "Password is required";
+          return;
+        } else {
+          password_error.innerHTML = "";
+        }
         postData(
           `http://localhost:9000/${input.Company ? "CompanyLogin" : "login"}`,
           input
@@ -118,5 +162,6 @@
         });
       });
     </script>
+    <script src="../script/nav.js"></script>
   </body>
 </html>

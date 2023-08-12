@@ -35,8 +35,30 @@
             </button>
           </li>
         </ul>
+        <button id="menu">&#9776;</button>
       </div>
     </nav>
+    <aside class="m-nav">
+      <ul>
+        <li>
+          <a style="color: black" href="./applied.html">Applied Job</a>
+        </li>
+        <li>
+          <a style="color: black" href="./job-list.html">Job List</a>
+        </li>
+        <li>
+          <a style="color: black" href="./for-company.html">For Company</a>
+        </li>
+        <li>
+          <a style="color: black" href="./login.html">Log in</a>
+        </li>
+        <li>
+          <button class="btn">
+            <a style="color: white" href="./sign-up.html">Sign up</a>
+          </button>
+        </li>
+      </ul>
+    </aside>
     <div class="parent clearfix">
       <!-- <div class="bg-illustration">
         <div class="burger-btn">
@@ -56,15 +78,39 @@
           <div class="login-form">
             <form id="sign-up" action="">
               <input id="CompanyName" type="text" placeholder="Company name" />
+              <p
+                style="font-size: small; margin-left: 10px; color: red"
+                id="CompanyName-error"
+              ></p>
               <input id="Email" type="email" placeholder="E-mail Address" />
+              <p
+                style="font-size: small; margin-left: 10px; color: red"
+                id="Email-error"
+              ></p>
               <input id="Address" type="text" placeholder="Company Address" />
+              <p
+                style="font-size: small; margin-left: 10px; color: red"
+                id="Address-error"
+              ></p>
               <input id="Industry" type="text" placeholder="Industry" />
+              <p
+                style="font-size: small; margin-left: 10px; color: red"
+                id="Industry-error"
+              ></p>
               <input id="Password" type="password" placeholder="Password" />
+              <p
+                style="font-size: small; margin-left: 10px; color: red"
+                id="Password-error"
+              ></p>
               <input
                 id="ComfirmPassword"
                 type="password"
                 placeholder="Comfirm Password"
               />
+              <p
+                style="font-size: small; margin-left: 10px; color: red"
+                id="ComfirmPassword-error"
+              ></p>
               <button style="margin-left: auto" class="btn">Sign up</button>
             </form>
           </div>
@@ -77,6 +123,12 @@
       const Password = document.getElementById("Password");
       const ComfirmPassword = document.getElementById("ComfirmPassword");
       const Signup = document.getElementById("sign-up");
+      const Email_error = document.getElementById("Email-error");
+      const CompanyName_error = document.getElementById("CompanyName-error");
+      const Password_error = document.getElementById("Password-error");
+      const ComfirmPassword_error = document.getElementById(
+        "ComfirmPassword-error"
+      );
       let input = {};
       CompanyName.addEventListener("change", (e) => {
         input.CompanyName = e.target.value;
@@ -109,11 +161,54 @@
 
       Signup.addEventListener("submit", (e) => {
         e.preventDefault();
+        if (!input.FullName) {
+          CompanyName_error.innerHTML = "Company Name is required";
+          return;
+        } else {
+          CompanyName_error.innerHTML = "";
+        }
+
+        if (!input.Email) {
+          Email_error.innerHTML = "Email is required";
+          return;
+        } else {
+          Email_error.innerHTML = "";
+        }
+
+        // if (!input.PhoneNumber) {
+        //   PhoneNumber_error.innerHTML = "Phone Number is required";
+        //   return;
+        // } else if (input.PhoneNumber.length < 10) {
+        //   PhoneNumber_error.innerHTML =
+        //     "Phone Number must be atleast 10 digits";
+        //   return;
+        // } else {
+        //   PhoneNumber_error.innerHTML = "";
+        // }
+
+        if (!input.Password) {
+          Password_error.innerHTML = "Password is required";
+          return;
+        } else {
+          Password_error.innerHTML = "";
+        }
+
+        if (!input.ComfirmPassword) {
+          ComfirmPassword_error.innerHTML = "Comfirm Password is required";
+          return;
+        } else if (input.Password !== input.ComfirmPassword) {
+          ComfirmPassword_error.innerHTML =
+            "Comfirm Password must match password";
+          return;
+        } else {
+          ComfirmPassword_error.innerHTML = "";
+        }
         postData("http://localhost:9000/Companysignin", input).then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
           window.location.pathname = "/login.html";
         });
       });
     </script>
+    <script src="../script/nav.js"></script>
   </body>
 </html>
