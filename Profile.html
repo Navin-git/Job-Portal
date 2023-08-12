@@ -63,7 +63,7 @@
         </li>
       </ul>
     </aside>
-    <section class="profile-sec">
+    <form id="profile-form" class="profile-sec">
       <h3>My profile</h3>
       <div class="profile-img-card">
         <div style="display: flex; align-items: center; gap: 20px">
@@ -201,7 +201,7 @@
           <label for="College-Undergraduate-Course"
             >College Undergraduate Course</label
           >
-          <input type="text" name="" id="" />
+          <input type="text" name="" id="College-Undergraduate-Course" />
           <p
             style="font-size: small; margin-left: 10px; color: red"
             id="College-Undergraduate-Course-error"
@@ -239,7 +239,7 @@
         <div></div>
         <button style="margin-left: auto" class="btn">Submit</button>
       </div>
-    </section>
+    </form>
     <footer>
       <img
         class="logo"
@@ -302,6 +302,42 @@
       Type.addEventListener("change", (e) => {
         input.Type = e.target.value;
       });
+      DOB.addEventListener("change", (e) => {
+        input.DOB = e.target.value;
+      });
+      Prefered_Salary.addEventListener("change", (e) => {
+        input.Prefered_Salary = e.target.value;
+      });
+      Prefered_Job_Type.addEventListener("change", (e) => {
+        input.Prefered_Job_Type = e.target.value;
+      });
+      School.addEventListener("change", (e) => {
+        input.School = e.target.value;
+      });
+      School_Passout.addEventListener("change", (e) => {
+        input.School_Passout = e.target.value;
+      });
+      PlussTwo.addEventListener("change", (e) => {
+        input.PlussTwo = e.target.value;
+      });
+      Passout.addEventListener("change", (e) => {
+        input.Passout = e.target.value;
+      });
+      College_Undergraduate.addEventListener("change", (e) => {
+        input.College_Undergraduate = e.target.value;
+      });
+      College_Undergraduate_Course.addEventListener("change", (e) => {
+        input.College_Undergraduate_Course = e.target.value;
+      });
+      College_Postgraduate.addEventListener("change", (e) => {
+        input.College_Postgraduate = e.target.value;
+      });
+      College_Postgraduate_Course.addEventListener("change", (e) => {
+        input.College_Postgraduate_Course = e.target.value;
+      });
+      College_Postgraduate_Passout.addEventListener("change", (e) => {
+        input.College_Postgraduate_Passout = e.target.value;
+      });
 
       async function postData(url = "", data = {}) {
         const response = await fetch(url, {
@@ -352,15 +388,15 @@
           Address_error.innerHTML = "";
         }
 
-        if (!input.Type) {
-          Type_error.innerHTML = "Comfirm Address is required";
-          return;
-        } else if (input.Address !== input.Type) {
-          Type_error.innerHTML = "Comfirm Address must match Address";
-          return;
-        } else {
-          Type_error.innerHTML = "";
-        }
+        // if (!input.Type) {
+        //   Type_error.innerHTML = "Comfirm Address is required";
+        //   return;
+        // } else if (input.Address !== input.Type) {
+        //   Type_error.innerHTML = "Comfirm Address must match Address";
+        //   return;
+        // } else {
+        //   Type_error.innerHTML = "";
+        // }
         postData("http://localhost:9000/Profile", {
           DOB: input.DOB,
           Address: input.Address,
