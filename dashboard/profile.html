@@ -89,14 +89,14 @@
                 id="Email-error"
               ></p>
             </div>
-            <div class="input-div">
+            <!-- <div class="input-div">
               <label for="Phone">Phone</label>
               <input type="text" name="Phone" id="Phone" />
               <p
                 style="font-size: small; margin-left: 10px; color: red"
                 id="Phone-error"
               ></p>
-            </div>
+            </div> -->
             <div class="input-div">
               <label for="Address">Address</label>
               <input type="text" name="" id="Address" />
@@ -106,21 +106,21 @@
               ></p>
             </div>
             <div class="input-div">
-              <label for="Type">Type</label>
+              <label for="Type">Industry</label>
               <input type="text" name="" id="Type" />
               <p
                 style="font-size: small; margin-left: 10px; color: red"
                 id="Type-error"
               ></p>
             </div>
-            <div class="input-div">
+            <!-- <div class="input-div">
               <label for="Type">Type</label>
               <input type="text" name="" id="Type" />
               <p
                 style="font-size: small; margin-left: 10px; color: red"
                 id="Type-error"
               ></p>
-            </div>
+            </div> -->
 
             <div></div>
             <button style="margin-left: auto; width: fit-content" class="btn">
@@ -162,7 +162,7 @@
 
       async function postData(url = "", data = {}) {
         const response = await fetch(url, {
-          method: "POST",
+          method: "PUT",
           mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
@@ -218,9 +218,14 @@
         } else {
           Type_error.innerHTML = "";
         }
-        postData("http://localhost:9000/signin", input).then((data) => {
+        postData("http://localhost:9000/Companyprofile", {
+          Email: input.Email,
+          CompanyName: input.Name,
+          Address: input.Address,
+          Industry: input.Type,
+        }).then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
-          window.location.pathname = "/login.html";
+          window.location.reload();
         });
       });
     </script>

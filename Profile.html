@@ -174,8 +174,8 @@
           ></p>
         </div>
         <div class="input-div">
-          <label for="School">+2 School</label>
-          <input type="text" name="" id="School" />
+          <label for="12School">+2 School</label>
+          <input type="text" name="" id="12School" />
           <p
             style="font-size: small; margin-left: 10px; color: red"
             id="School-error"
@@ -257,7 +257,28 @@
       const Email = document.getElementById("Email");
       const Phone = document.getElementById("Phone");
       const Address = document.getElementById("Address");
-      const Industry = document.getElementById("Industry");
+      const DOB = document.getElementById("DOB");
+      const Prefered_Salary = document.getElementById("Prefered-Salary");
+      const Prefered_Job_Type = document.getElementById("Prefered-Job-Type");
+      const School = document.getElementById("School");
+      const School_Passout = document.getElementById("School-Passout");
+      const PlussTwo = document.getElementById("12School");
+      const Passout = document.getElementById("Passout");
+      const College_Undergraduate = document.getElementById(
+        "College-Undergraduate"
+      );
+      const College_Undergraduate_Course = document.getElementById(
+        "College-Undergraduate-Course"
+      );
+      const College_Postgraduate = document.getElementById(
+        "College-Postgraduate"
+      );
+      const College_Postgraduate_Course = document.getElementById(
+        "College-Postgraduate-Course"
+      );
+      const College_Postgraduate_Passout = document.getElementById(
+        "College-Postgraduate-Passout"
+      );
       const Type = document.getElementById("Type");
       const Signup = document.getElementById("profile-form");
       const Email_error = document.getElementById("Email-error");
@@ -340,9 +361,18 @@
         } else {
           Type_error.innerHTML = "";
         }
-        postData("http://localhost:9000/signin", input).then((data) => {
+        postData("http://localhost:9000/Profile", {
+          DOB: input.DOB,
+          Address: input.Address,
+          FullName: input.Name,
+          Email: input.Email,
+          PhoneNumber: input.Phone,
+          PreferedSalary: input.PreferedSalary,
+          Prefered_jobtype: input.Prefered_jobtype,
+          Prefered_jobtitle: input.Prefered_jobtitle,
+        }).then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
-          window.location.pathname = "/login.html";
+          window.location.reload();
         });
       });
     </script>
