@@ -173,6 +173,9 @@
       </section>
     </div>
     <script>
+      const params = new URLSearchParams(window.location.search);
+
+      console.log(params.get("J_id"));
       const Title = document.getElementById("Title");
       const Job_Industry = document.getElementById("Job-Industry");
       const Open_Vacancy = document.getElementById("Open-Vacancy");
