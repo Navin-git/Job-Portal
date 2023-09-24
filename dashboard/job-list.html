@@ -57,30 +57,13 @@
               <th>Title</th>
               <th>Type</th>
               <th>Salary</th>
-              <th>Industry</th>
-              <th>Vacancy</th>
+              <th>Job expirence</th>
+              <th>Due date</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
-            <script>
-              const getData = async () => {
-                let res = await fetch("http://localhost:9000/Jobs", {
-                  method: "GET",
-                  mode: "cors",
-                  cache: "no-cache",
-                  credentials: "same-origin",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  redirect: "follow",
-                  referrerPolicy: "no-referrer",
-                });
-                console.log(res);
-              };
-              getData();
-            </script>
-            <tr>
+          <tbody id="joblist">
+            <!-- <tr>
               <td>Alfreds Futterkiste</td>
               <td>Maria Anders</td>
               <td>Germany</td>
@@ -157,10 +140,49 @@
                   <button style="width: fit-content" class="btn">delete</button>
                 </div>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </section>
     </div>
+    <script>
+      const joblist = document.getElementById("joblist");
+      const getData = async () => {
+        try {
+          const response = await fetch("http://localhost:9000/Jobs", {
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+          });
+
+          const data = await response.json();
+          data.forEach((item) => {
+            joblist.append = `<tr>
+              <td>${item?.job_title}</td>
+              <td>${item?.Job_type}</td>
+              <td>${item?.Salary}</td>
+              <td>${item?.Job_expirence}</td>
+              <td>${item?.Due_date}</td>
+              <td>
+                <div style="display: flex; gap: 10px; width: fit-content">
+                  <button class="outline-btn">Edit</button>
+                  <button style="width: fit-content" class="btn">delete</button>
+                </div>
+              </td>
+            </tr>`;
+          });
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      };
+
+      getData();
+    </script>
   </body>
 </html>
