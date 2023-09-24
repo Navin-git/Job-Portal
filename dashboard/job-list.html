@@ -63,6 +63,12 @@
             </tr>
           </thead>
           <tbody>
+            <script>
+              const getData = async () => {
+                let res = await fetch("http://localhost:9000/Jobs");
+                console.log(res);
+              };
+            </script>
             <tr>
               <td>Alfreds Futterkiste</td>
               <td>Maria Anders</td>

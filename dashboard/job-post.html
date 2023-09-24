@@ -72,7 +72,7 @@
           </div>
           <div class="input-div">
             <label for="Open-Vacancy">Open Vacancy</label>
-            <input type="text" name="" id="Open-Vacancy" />
+            <input type="number" name="" id="Open-Vacancy" />
             <p
               style="font-size: small; margin-left: 10px; color: red"
               id="Open-Vacancy-error"
@@ -290,8 +290,8 @@
           Salary_error.innerHTML = "";
         }
         postData("http://localhost:9000/Jobs", {
-          JobTitle: input.title,
-          salary: input.salary,
+          JobTitle: input.Title,
+          salary: input.Salary,
           jobType: input.job_type,
           jobindustry: input.Job_Industry,
           OpenVacency: input.Open_Vacancy,
