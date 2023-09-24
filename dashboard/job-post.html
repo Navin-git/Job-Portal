@@ -175,31 +175,29 @@
     <script>
       const params = new URLSearchParams(window.location.search);
 
-      if (params.get("J_id")) {
-        const getData = async () => {
-          try {
-            const response = await fetch(
-              `http://localhost:9000/JobsDetails?J_id=${params.get("J_id")}`,
-              {
-                method: "GET",
-                mode: "cors",
-                cache: "no-cache",
-                credentials: "same-origin",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                redirect: "follow",
-                referrerPolicy: "no-referrer",
-              }
-            );
+      const getData = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:9000/JobsDetails?J_id=${params.get("J_id")}`,
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
 
-            const data = await response.json();
-            console.log(data);
-          } catch (error) {
-            console.error("An error occurred:", error);
-          }
-        };
-      }
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      };
 
       console.log(params.get("J_id"));
       const Title = document.getElementById("Title");
@@ -335,6 +333,9 @@
           window.location.pathname = "/dashboard/job-list.html";
         });
       });
+      if (params.get("J_id")) {
+        getData();
+      }
     </script>
   </body>
 </html>
