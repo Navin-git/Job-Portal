@@ -65,7 +65,17 @@
           <tbody>
             <script>
               const getData = async () => {
-                let res = await fetch("http://localhost:9000/Jobs");
+                let res = await fetch("http://localhost:9000/Jobs", {
+                  method: "GET",
+                  mode: "cors",
+                  cache: "no-cache",
+                  credentials: "same-origin",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  redirect: "follow",
+                  referrerPolicy: "no-referrer",
+                });
                 console.log(res);
               };
             </script>
