@@ -149,29 +149,36 @@
       const joblist = document.getElementById("joblist");
       const getData = async () => {
         try {
-          const response = await fetch("http://localhost:9000/Jobs", {
-            method: "GET",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
-          });
+          const response = await fetch(
+            `http://localhost:9000/CompanyJob?C_id=${
+              JSON.parse(localStorage.getItem("user")).C_id
+            }`,
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
 
           const data = await response.json();
           data.forEach((item) => {
-            joblist.append = `<tr>
-              <td>${item?.job_title}</td>
+            joblist.innerHTML += `<tr>
+              <td>${item?.Job_title}</td>
               <td>${item?.Job_type}</td>
               <td>${item?.Salary}</td>
               <td>${item?.Job_expirence}</td>
-              <td>${item?.Due_date}</td>
+              <td>${item?.Due_date.split("T")[0]}</td>
               <td>
                 <div style="display: flex; gap: 10px; width: fit-content">
-                  <button class="outline-btn">Edit</button>
+                  <button onclick="delJob(${
+                    item?.J_id
+                  })" class="outline-btn">Edit</button>
                   <button style="width: fit-content" class="btn">delete</button>
                 </div>
               </td>
@@ -183,6 +190,9 @@
       };
 
       getData();
+      const delJob = (J_id) => {
+        window.location.pathname = `/dashboard/job-post.html?j_id=${J_id}`;
+      };
     </script>
   </body>
 </html>
