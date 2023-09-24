@@ -329,6 +329,16 @@
           const data = await response.json();
           console.log(data);
           Title.value = data?.Job_title;
+          Job_Industry = data?.Job_industry;
+          Open_Vacancy = data?.Open_vacancy;
+          Due_Date = data?.Due_date;
+          Job_Expirence = data?.Job_expirence;
+          Skill = data?.skill;
+          Role = data?.roles;
+          Salary = data?.Salary;
+          Job_Description = data?.Job_desc;
+          Job_Type = data?.Job_type;
+          Education_Requirement = data?.Requirements;
         } catch (error) {
           console.error("An error occurred:", error);
         }
