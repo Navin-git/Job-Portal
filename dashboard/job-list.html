@@ -160,31 +160,6 @@
             }
           );
 
-          async function DeleteData(url = "", data = {}) {
-            const response = await fetch(url, {
-              method: "DELETE",
-              mode: "cors",
-              cache: "no-cache",
-              credentials: "same-origin",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              redirect: "follow",
-              referrerPolicy: "no-referrer",
-              body: JSON.stringify(data),
-            });
-            return response.json();
-          }
-
-          const handleDelete = (id) => {
-            postData("http://localhost:9000/Jobs", {
-              J_id: id,
-            }).then((data) => {
-              console.log(data); // JSON data parsed by `data.json()` call
-              window.location.reload();
-            });
-          };
-
           const data = await response.json();
           data.forEach((item) => {
             joblist.innerHTML += `<tr>
@@ -211,6 +186,29 @@
       };
 
       getData();
+      async function DeleteData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "DELETE",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+
+      const handleDelete = (id) => {
+        DeleteData("http://localhost:9000/Jobs", {
+          J_id: id,
+        }).then(() => {
+          window.location.reload();
+        });
+      };
       const delJob = (J_id) => {
         window.location.href = `/dashboard/job-post.html?J_id=${J_id}`;
       };
