@@ -387,18 +387,24 @@
             }
           );
 
-          const data = await response.json();
+          const data = await response.json()?.jobDetails;
           console.log(data);
           Title.value = data?.Job_title;
           Job_Industry = data?.Job_industry;
           Open_Vacancy = data?.Open_vacancy;
           Due_Date.value = data?.Due_date.split("T")[0];
           Job_Expirence = data?.Job_expirence;
-          Role = Job_roles;
+          Job_roles = data?.jobRoles.map((item) => {
+            Role_list.innerHTML += `<li>${item.roles}</li>`;
+            return item.roles;
+          });
           Salary = data?.Salary;
           Job_Description = data?.Job_desc;
           Job_Type = data?.Job_type;
-          Education_Requirement = Education_List_Arr;
+          Education_List_Arr = data?.eduReq.map((item) => {
+            Education_List.innerHTML += `<li>${Requirements}</li>`;
+            return item.Requirements;
+          });
         } catch (error) {
           console.error("An error occurred:", error);
         }
