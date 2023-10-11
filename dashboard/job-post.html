@@ -53,7 +53,7 @@
       <section style="padding: 20px">
         <h3>Add Job</h3>
         <br />
-        <form id="form" action="" class="profile-form">
+        <div onkeyup="handleKeyUp(event)" action="" class="profile-form">
           <div class="input-div">
             <label for="Title">Title</label>
             <input type="text" name="" id="Title" />
@@ -185,10 +185,11 @@
               height: fit-content;
             "
             class="btn"
+            id="form"
           >
             Submit
           </button>
-        </form>
+        </div>
       </section>
     </div>
     <script>
@@ -300,8 +301,16 @@
       }
 
       console.log(Profile_form);
+      // function handleKeyUp(event) {
+      //   event = event || window.event;
 
-      Profile_form.addEventListener("submit", (e) => {
+      //   if (event.keyCode === 13) {
+      //     event.stopPropagation();
+      //     // Add any desired actions to be taken when Enter is pressed
+      //   }
+      // }
+
+      Profile_form.addEventListener("click", (e) => {
         e.preventDefault();
         if (!input.Title) {
           Title_error.innerHTML = "Titleis required";
