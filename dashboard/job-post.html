@@ -347,7 +347,12 @@
           jobDesc: input.Job_Description,
           Educationrequiremnts: Education_List_Arr,
           DueDate: input.Due_Date,
-          PostDate: new Date(),
+          PostDate:
+            new Date().getFullYear() +
+            "-" +
+            (new Date().getMonth() + 1).toString().padStart(2, "0") +
+            "-" +
+            String(new Date().getDate()).padStart(2, "0"),
           JobExpirence: input.Job_Expirence,
           // skills: input.Skill,
           Roles: Job_roles,
