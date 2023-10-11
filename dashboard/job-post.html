@@ -283,9 +283,11 @@
         }
       }
 
+      let J_id;
+
       async function postData(url = "", data = {}) {
         const response = await fetch(url, {
-          method: params.get("J_id") ? "PATCH" : "POST",
+          method: params.get("J_id") ? "PUT" : "POST",
           mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
@@ -346,7 +348,10 @@
           Salary_error.innerHTML = "";
         }
         postData(`http://localhost:9000/Jobs`, {
-          C_id: JSON.parse(localStorage?.getItem("user"))?.C_id,
+          J_id: params.get("J_id"),
+          C_id: params.get("J_id")
+            ? undefined
+            : JSON.parse(localStorage?.getItem("user"))?.C_id,
           JobTitle: input.Title,
           salary: input.Salary,
           jobType: input.job_type,
@@ -389,6 +394,7 @@
           const data = await response.json();
           console.log(data);
           if (data) {
+            J_id = data?.jobDetails?.J_id;
             Title.value = data?.jobDetails?.Job_title;
             input.Title = data?.jobDetails?.Job_title;
             Job_Industry.value = data?.jobDetails?.Job_industry;
