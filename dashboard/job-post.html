@@ -331,7 +331,7 @@
           Title.value = data?.Job_title;
           Job_Industry = data?.Job_industry;
           Open_Vacancy = data?.Open_vacancy;
-          Due_Date = data?.Due_date;
+          Due_Date.value = data?.Due_date.split("T")[0];
           Job_Expirence = data?.Job_expirence;
           Skill = data?.skill;
           Role = data?.roles;

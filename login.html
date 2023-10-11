@@ -143,13 +143,17 @@
         postData(
           `http://localhost:9000/${input.Company ? "CompanyLogin" : "login"}`,
           input
-        ).then((res) => {
-          console.log(res); // JSON res parsed by `res.json()` call
-          window.localStorage.setItem("user", JSON.stringify(res));
-          window.location.pathname = input.Company
-            ? "/dashboard/job-post.html"
-            : "/index.html";
-        });
+        )
+          .then((res) => {
+            console.log(res); // JSON res parsed by `res.json()` call
+            window.localStorage.setItem("user", JSON.stringify(res));
+            window.location.pathname = input.Company
+              ? "/dashboard/job-post.html"
+              : "/index.html";
+          })
+          .catch((err) => {
+            alert("Unauthorixed");
+          });
       });
     </script>
     <script src="../script/nav.js"></script>

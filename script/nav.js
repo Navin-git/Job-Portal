@@ -9,15 +9,23 @@ menu.addEventListener("click", () => {
   sideNav[0].style.width = show ? "320px" : "0px";
 });
 
+const handleLogout = () => {
+  localStorage.clear();
+  window.location.pathname = "/";
+};
+
 let user = JSON.parse(localStorage?.getItem("user"));
 
-if (user.U_id) {
-  for (i in log) {
-    i.innerHtml = "<li><button>logout</button></li>";
+if (user?.U_id) {
+  for (let i = 0; i < log.length; i++) {
+    console.log(log[i], i);
+    log[
+      i
+    ].innerHTML = `<li><button class="btn" onClick="handleLogout()">logout</button></li>`;
   }
 } else {
   for (i in log) {
-    i.innerHtml = `<li>
+    log[i].innerHTML = `<li>
   <a style="color: black" href="./for-company.html">For Company</a>
 </li>
 <li>
