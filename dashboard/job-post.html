@@ -125,25 +125,44 @@
               id="Job-Expirence-error"
             ></p>
           </div>
-          <div class="input-div">
+          <!-- <div class="input-div">
             <label for="Skill">Skill</label>
             <input type="text" name="" id="Skill" />
             <p
               style="font-size: small; margin-left: 10px; color: red"
               id="Skill-error"
             ></p>
-          </div>
+          </div> -->
           <div class="input-div">
             <label for="Education-Requirement">Education Requirement</label>
-            <input type="text" name="" id="Education-Requirement" />
+            <ul
+              style="margin: 0 30px; display: flex; gap: 20px; flex-wrap: wrap"
+              id="Education-list"
+            ></ul>
+            <input
+              type="text"
+              name=""
+              onkeyup="handleEducationKeyUp(event)"
+              id="Education-Requirement"
+            />
             <p
               style="font-size: small; margin-left: 10px; color: red"
               id="Education-Requirement-error"
             ></p>
           </div>
           <div class="input-div">
-            <label for="Role">Role</label>
-            <input type="text" name="" id="Role" />
+            <label for="Role">Job Role</label>
+            <ul
+              style="margin: 0 30px; display: flex; gap: 20px; flex-wrap: wrap"
+              id="role-list"
+            ></ul>
+            <input
+              type="text"
+              name=""
+              onkeyup="handleRoleKeyUp(event)"
+              id="Role"
+            />
+
             <p
               style="font-size: small; margin-left: 10px; color: red"
               id="Role-error"
@@ -181,14 +200,16 @@
       const Open_Vacancy = document.getElementById("Open-Vacancy");
       const Due_Date = document.getElementById("Due-Date");
       const Job_Expirence = document.getElementById("Job-Expirence");
-      const Skill = document.getElementById("Skill");
+      // const Skill = document.getElementById("Skill");
       const Role = document.getElementById("Role");
+      const Role_list = document.getElementById("role-list");
       const Salary = document.getElementById("Salary");
       const Job_Description = document.getElementById("Job-Description");
       const Job_Type = document.getElementById("job_type");
       const Education_Requirement = document.getElementById(
         "Education-Requirement"
       );
+      const Education_List = document.getElementById("Education-list");
       const Title_error = document.getElementById("Title-error");
       const Due_Date_error = document.getElementById("Due-Date-error");
       const Salary_error = document.getElementById("Salary-error");
@@ -222,12 +243,13 @@
       Job_Expirence.addEventListener("change", (e) => {
         input.Job_Expirence = e.target.value;
       });
-      Skill.addEventListener("change", (e) => {
-        input.Skill = e.target.value;
-      });
+      // Skill.addEventListener("change", (e) => {
+      //   input.Skill = e.target.value;
+      // });
       Role.addEventListener("change", (e) => {
         input.Role = e.target.value;
       });
+
       Job_Description.addEventListener("change", (e) => {
         input.Job_Description = e.target.value;
       });
@@ -237,6 +259,29 @@
       Job_Type.addEventListener("change", (e) => {
         input.job_type = e.target.value;
       });
+      let Job_roles = [];
+
+      function handleRoleKeyUp(event) {
+        event = event || window.event;
+        if (event.keyCode === 13) {
+          Job_roles?.push(input.Role);
+          Role_list.innerHTML += `<li>${input.Role}</li>`;
+          Role.value = "";
+          // Add any desired actions to be taken when Enter is pressed
+        }
+      }
+
+      let Education_List_Arr = [];
+
+      function handleEducationKeyUp(event) {
+        event = event || window.event;
+        if (event.keyCode === 13) {
+          Education_List_Arr?.push(input.Education_Requirement);
+          Education_List.innerHTML += `<li>${input.Education_Requirement}</li>`;
+          Education_Requirement.value = "";
+          // Add any desired actions to be taken when Enter is pressed
+        }
+      }
 
       async function postData(url = "", data = {}) {
         const response = await fetch(url, {
@@ -292,18 +337,20 @@
         } else {
           Salary_error.innerHTML = "";
         }
-        postData("http://localhost:9000/Jobs", {
+        postData(`http://localhost:9000/Jobs`, {
+          C_id: JSON.parse(localStorage?.getItem("user"))?.C_id,
           JobTitle: input.Title,
           salary: input.Salary,
           jobType: input.job_type,
           jobindustry: input.Job_Industry,
           OpenVacency: input.Open_Vacancy,
           jobDesc: input.Job_Description,
+          Educationrequiremnts: Education_List_Arr,
           DueDate: input.Due_Date,
           PostDate: new Date(),
           JobExpirence: input.Job_Expirence,
-          skills: input.Skill,
-          Roles: input.Role,
+          // skills: input.Skill,
+          Roles: Job_roles,
         }).then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
           window.location.pathname = "/dashboard/job-list.html";
@@ -333,12 +380,11 @@
           Open_Vacancy = data?.Open_vacancy;
           Due_Date.value = data?.Due_date.split("T")[0];
           Job_Expirence = data?.Job_expirence;
-          Skill = data?.skill;
-          Role = data?.roles;
+          Role = Job_roles;
           Salary = data?.Salary;
           Job_Description = data?.Job_desc;
           Job_Type = data?.Job_type;
-          Education_Requirement = data?.Requirements;
+          Education_Requirement = Education_List_Arr;
         } catch (error) {
           console.error("An error occurred:", error);
         }
