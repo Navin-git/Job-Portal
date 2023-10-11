@@ -286,7 +286,7 @@
 
       async function postData(url = "", data = {}) {
         const response = await fetch(url, {
-          method: "POST",
+          method: params.get("J_id") ? "PATCH" : "POST",
           mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
@@ -387,22 +387,22 @@
             }
           );
 
-          const data = await response.json()?.jobDetails;
+          const data = await response.json();
           console.log(data);
-          Title.value = data?.Job_title;
-          Job_Industry = data?.Job_industry;
-          Open_Vacancy = data?.Open_vacancy;
-          Due_Date.value = data?.Due_date.split("T")[0];
-          Job_Expirence = data?.Job_expirence;
+          Title.value = data?.jobDetails?.Job_title;
+          Job_Industry.value = data?.jobDetails?.Job_industry;
+          Open_Vacancy.value = data?.jobDetails?.Open_vacency;
+          Due_Date.value = data?.jobDetails?.Due_date.split("T")[0];
+          Job_Expirence.value = data?.jobDetails?.Job_expirence;
           Job_roles = data?.jobRoles.map((item) => {
-            Role_list.innerHTML += `<li>${item.roles}</li>`;
+            Role_list.innerHTML += <li>${item.roles}</li>;
             return item.roles;
           });
-          Salary = data?.Salary;
-          Job_Description = data?.Job_desc;
-          Job_Type = data?.Job_type;
+          Salary.value = data?.jobDetails?.Salary;
+          Job_Description.value = data?.jobDetails?.Job_desc;
+          Job_Type.value = data?.jobDetails?.Job_type;
           Education_List_Arr = data?.eduReq.map((item) => {
-            Education_List.innerHTML += `<li>${Requirements}</li>`;
+            Education_List.innerHTML += <li>${item.Requirements}</li>;
             return item.Requirements;
           });
         } catch (error) {
