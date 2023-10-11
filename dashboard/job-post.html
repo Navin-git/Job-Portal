@@ -265,9 +265,12 @@
       function handleRoleKeyUp(event) {
         event = event || window.event;
         if (event.keyCode === 13) {
-          Job_roles?.push(input.Role);
-          Role_list.innerHTML += `<li>${input.Role}</li>`;
-          Role.value = "";
+          if (input.Role) {
+            Job_roles?.push(input.Role);
+            Role_list.innerHTML += `<li>${input.Role}</li>`;
+            input.Role = "";
+            Role.value = "";
+          }
           // Add any desired actions to be taken when Enter is pressed
         }
       }
@@ -277,9 +280,12 @@
       function handleEducationKeyUp(event) {
         event = event || window.event;
         if (event.keyCode === 13) {
-          Education_List_Arr?.push(input.Education_Requirement);
-          Education_List.innerHTML += `<li>${input.Education_Requirement}</li>`;
-          Education_Requirement.value = "";
+          if (input.Education_Requirement) {
+            Education_List_Arr?.push(input.Education_Requirement);
+            Education_List.innerHTML += `<li>${input.Education_Requirement}</li>`;
+            input.Education_Requirement = "";
+            Education_Requirement.value = "";
+          }
           // Add any desired actions to be taken when Enter is pressed
         }
       }
