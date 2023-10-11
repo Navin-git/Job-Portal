@@ -390,17 +390,25 @@
           console.log(data);
           if (data) {
             Title.value = data?.jobDetails?.Job_title;
+            input.Title = data?.jobDetails?.Job_title;
             Job_Industry.value = data?.jobDetails?.Job_industry;
+            input.Job_Industry = data?.jobDetails?.Job_industry;
             Open_Vacancy.value = data?.jobDetails?.Open_vacency;
+            input.Open_Vacancy = data?.jobDetails?.Open_vacency;
             Due_Date.value = data?.jobDetails?.Due_date.split("T")[0];
+            input.Due_Date = data?.jobDetails?.Due_date.split("T")[0];
             Job_Expirence.value = data?.jobDetails?.Job_expirence;
+            input.Job_Expirence = data?.jobDetails?.Job_expirence;
             Job_roles = data?.jobRoles.map((item) => {
               Role_list.innerHTML += `<li>${item.roles}</li>`;
               return item.roles;
             });
             Salary.value = data?.jobDetails?.Salary;
+            input.Salary = data?.jobDetails?.Salary;
             Job_Description.value = data?.jobDetails?.Job_desc;
+            input.Job_Description = data?.jobDetails?.Job_desc;
             Job_Type.value = data?.jobDetails?.Job_type;
+            input.job_type = data?.jobDetails?.Job_type;
             Education_List_Arr = data?.eduReq.map((item) => {
               Education_List.innerHTML += `<li>${item.Requirements}</li>`;
               return item.Requirements;
