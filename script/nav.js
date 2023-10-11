@@ -1,6 +1,7 @@
 const menu = document.getElementById("menu");
 const sideNav = document.getElementsByClassName("m-nav");
 const log = document.getElementsByClassName("log");
+const nav_log = document.getElementsByClassName("nav-log");
 
 let show = false;
 
@@ -16,14 +17,14 @@ const handleLogout = () => {
 
 let user = JSON.parse(localStorage?.getItem("user"));
 
-if (user?.U_id) {
+if (user?.C_id) {
   for (let i = 0; i < log.length; i++) {
     console.log(log[i], i);
     log[
       i
     ].innerHTML = `<li><button class="btn" onClick="handleLogout()">logout</button></li>`;
   }
-} else {
+} else if (log) {
   for (i in log) {
     log[i].innerHTML = `<li>
   <a style="color: black" href="./for-company.html">For Company</a>
@@ -36,5 +37,9 @@ if (user?.U_id) {
     <a style="color: white" href="./sign-up.html">Sign up</a>
   </button>
 </li>`;
+  }
+} else if (nav_log) {
+  for (i in log) {
+    log[i].innerHTML = ``;
   }
 }

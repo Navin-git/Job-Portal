@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style/dashboard/index.css" />
     <link rel="stylesheet" href="../style/dashboard/job-list.css" />
+
     <title>Dashboard</title>
   </head>
   <body>
@@ -38,14 +39,7 @@
             alt="logo"
             style="width: 40px"
           />
-          <ul>
-            <li>
-              <a style="color: black" href="./applied.html">Applied Job</a>
-            </li>
-            <li>
-              <a style="color: black" href="./web/about.html">For Company</a>
-            </li>
-          </ul>
+          <ul class="nav-log"></ul>
         </div>
       </nav>
       <section style="padding: 20px">
@@ -194,5 +188,6 @@
         window.location.href = `/dashboard/job-post.html?J_id=${J_id}`;
       };
     </script>
+    <script src="../script/dashnav.js"></script>
   </body>
 </html>
