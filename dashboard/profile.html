@@ -158,10 +158,10 @@
       Type.addEventListener("change", (e) => {
         input.Type = e.target.value;
       });
-      let user = JSON.parse(localStorage.getItem("user"));
+      let users = JSON.parse(localStorage.getItem("user"));
       async function postData(url = "", data = {}) {
         const response = await fetch(url, {
-          method: user?.C_id ? "PUT" : "POST",
+          method: users?.C_id ? "PUT" : "POST",
           mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
@@ -237,10 +237,10 @@
         });
       });
       const getData = async () => {
-        let user = JSON.parse(localStorage?.getItem("user"));
+        let users = JSON.parse(localStorage?.getItem("user"));
         try {
           const response = await fetch(
-            `http://localhost:9000/CompanyProfile?C_id=${user?.C_id}`,
+            `http://localhost:9000/CompanyProfile?C_id=${users?.C_id}`,
             {
               method: "GET",
               mode: "cors",
@@ -273,7 +273,7 @@
           console.error("An error occurred:", error);
         }
       };
-      if (user?.C_id) {
+      if (users?.C_id) {
         getData();
       } else window.location.pathname = "/Index.html";
     </script>
