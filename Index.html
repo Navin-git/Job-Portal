@@ -444,6 +444,7 @@
           if (data) {
             const jobList = document.getElementById("job-list");
             console.log(jobList);
+            jobList.innerHTML = "";
             data?.map((date, index) => {
               jobList.innerHTML += `  <div class="job-card">
           <div
