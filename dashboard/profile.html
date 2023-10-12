@@ -225,15 +225,14 @@
         //   Type_error.innerHTML = "";
         // }
 
-        postData("http://localhost:9000/Companyprofile", {
+        postData("http://localhost:9000/CompanyProfile", {
           C_id: user.C_id,
           Email: input.Email,
           CompanyName: input.Name,
           Address: input.Address,
           Industry: input.Type,
         })
-          .then((data) => {
-            console.log(data); // JSON data parsed by `data.json()` call
+          .then(() => {
             window.location.reload();
           })
           .catch((error) => {});
