@@ -340,6 +340,93 @@
           Job_type: e.target.value,
         });
       };
+
+      const getFirstData = async () => {
+        try {
+          const response = await fetch(`http://localhost:9000/`, {
+            method: "GET",
+            // body: e,
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+          });
+
+          const data = await response.json();
+          console.log(data);
+          if (data) {
+            const jobList = document.getElementById("job-list");
+            console.log(jobList);
+            jobList.innerHTML = "";
+            data?.map((item, index) => {
+              jobList.innerHTML += `  <div class="job-card">
+          <div
+            style="
+              display: flex;
+              gap: 10px;
+              align-items: center;
+              padding: 0 20px;
+            "
+          >
+            <img
+              src=${
+                item?.Comapny_logo ??
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
+              }
+              alt=""
+              style="width: 50px; border-radius: 5px;  flex-shrink: 0 !important;
+                    height: 60px;
+                    object-fit: contain;"
+            />
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 0 20px;
+              "
+            >
+              <h4>${item?.Company_name}</h4>
+              <p>${item?.Industry}</p>
+            </div>
+          </div>
+          <h1  style="padding: 0 20px">${item?.Job_title}</h1>
+          <p style="padding: 0 20px">
+            ${item?.Job_desc}
+          </p>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              padding: 0 20px;
+            "
+          >
+          <div style="display: flex; gap: 10px;">Location: <span class="tag">${
+            item?.Main_address
+          }</span></div>
+            <div style="display: flex; gap: 10px;">Job Tab: <span class="tag">${
+              item?.Job_type
+            }</span></div>
+            <div>Post date: ${item?.Post_date?.split("T")[0]}</div>
+          </div>
+          <div class="job-card-review">
+            <span>${item?.Open_vacency} Open Position</span>
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>`;
+              return;
+            });
+          }
+        } catch (err) {
+          // alert("An error occurred:", error);
+        }
+      };
+      getFirstData();
     </script>
     <script>
      
