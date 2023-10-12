@@ -263,9 +263,8 @@
             console.log(jobList);
             jobList.innerHTML = "";
             data?.map((item, index) => {
-              jobList.innerHTML += `  <div class="job-card">
+              jobList.innerHTML += `  <div onclick={handleOpen(item?.J_id)} class="job-card">
           <div
-          onclick={handleOpen(item?.J_id)}
             style="
               display: flex;
               gap: 10px;
