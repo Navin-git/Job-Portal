@@ -445,7 +445,7 @@
             const jobList = document.getElementById("job-list");
             console.log(jobList);
             jobList.innerHTML = "";
-            data?.map((date, index) => {
+            data?.map((item, index) => {
               jobList.innerHTML += `  <div class="job-card">
           <div
             style="
@@ -456,7 +456,7 @@
             "
           >
             <img
-              src=${date?.Company_logo}
+              src=${item?.Company_logo}
               alt=""
               style="width: 50px; border-radius: 5px;  flex-shrink: 0 !important;
                     height: 60px;
@@ -470,12 +470,12 @@
                 padding: 0 20px;
               "
             >
-              <h4>${data?.Company_name}</h4>
-              <p>${data?.Industry}</p>
+              <h4>${item?.Company_name}</h4>
+              <p>${item?.Industry}</p>
             </div>
           </div>
           <p style="padding: 0 20px">
-            ${data?.Job_decs}
+            ${item?.Job_decs}
           </p>
           <div
             style="
@@ -486,12 +486,12 @@
             "
           >
           <div style="display: flex; gap: 10px;">Salary: <span class="tag">${
-            data?.Main_address
+            item?.Main_address
           }</span></div>
             <div style="display: flex; gap: 10px;">Job Tab: <span class="tag">${
-              data?.Job_type
+              item?.Job_type
             }</span></div>
-            <div>Post date: ${data?.Post_date?.split("T")[0]}</div>
+            <div>Post date: ${item?.Post_date?.split("T")[0]}</div>
           </div>
           <div class="job-card-review">
             <span>40 Open Position</span>
