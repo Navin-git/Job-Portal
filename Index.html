@@ -67,37 +67,6 @@
           "
         >
           <h1>Hiring now</h1>
-          <div style="display: flex; gap: 20px; align-items: center">
-            <!-- <select name="" class="custom-select" placeholder="Location" id="">
-              <option value="">Location</option>
-              <option value=""></option>
-            </select> -->
-            <input
-              type="text"
-              name=""
-              onchange="Locationchange(event)"
-              onkeyup="HandlelocationchangeKeyUp(event)"
-              placeholder="location"
-              style="
-                padding: 13px 20px;
-                border-radius: 5px;
-                border: 1px solid #808080;
-                font-size: 16px;
-              "
-              id=""
-            />
-            <select
-              name=""
-              onchange="typechange(event)"
-              class="custom-select"
-              placeholder="Location"
-              id=""
-            >
-              <option value="">Type</option>
-              <option value="Part Time">Part Time</option>
-              <option value="Full Time">Full Time</option>
-            </select>
-          </div>
         </div>
         <div class="job-detail">
           <button id="show-less" class="show-detail"><</button>
@@ -418,26 +387,20 @@
         showLess.style.display = "none";
       }
 
-      const getData = async (e) => {
-        console.log(e);
+      const getData = async () => {
         try {
-          const response = await fetch(
-            `http://localhost:9000/JobsFilter?Location=${
-              e?.Location ?? ""
-            }&Job_type=${e?.Job_type ?? ""}`,
-            {
-              method: "GET",
-              // body: e,
-              mode: "cors",
-              cache: "no-cache",
-              credentials: "same-origin",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              redirect: "follow",
-              referrerPolicy: "no-referrer",
-            }
-          );
+          const response = await fetch(`http://localhost:9000/`, {
+            method: "GET",
+            // body: e,
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+          });
 
           const data = await response.json();
           console.log(data);
@@ -509,24 +472,7 @@
           // alert("An error occurred:", error);
         }
       };
-      let locationtext;
-      const Locationchange = (e) => {
-        locationtext = e.target.value;
-      };
-      function HandlelocationchangeKeyUp(event) {
-        event = event || window.event;
-        if (event.keyCode === 13) {
-          getData({
-            Location: locationtext,
-          });
-          // Add any desired actions to be taken when Enter is pressed
-        }
-      }
-      const typechange = (e) => {
-        getData({
-          Job_type: e.target.value,
-        });
-      };
+      getData();
     </script>
     <script></script>
     <script src="../script/nav.js"></script>
