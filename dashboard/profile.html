@@ -103,7 +103,7 @@
             </div>
             <div class="input-div">
               <label for="Type">Industry</label>
-              <input type="text" name="" id="Type" />
+              <input type="text" name="" id="Industry" />
               <p
                 style="font-size: small; margin-left: 10px; color: red"
                 id="Type-error"
@@ -231,10 +231,12 @@
           CompanyName: input.Name,
           Address: input.Address,
           Industry: input.Type,
-        }).then((data) => {
-          console.log(data); // JSON data parsed by `data.json()` call
-          window.location.reload();
-        });
+        })
+          .then((data) => {
+            console.log(data); // JSON data parsed by `data.json()` call
+            window.location.reload();
+          })
+          .catch((error) => {});
       });
       const getData = async () => {
         let users = JSON.parse(localStorage?.getItem("user"));
