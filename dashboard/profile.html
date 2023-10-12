@@ -198,7 +198,7 @@
 
         // Check if a file was selected
         if (!file) {
-          console.error("No file selected.");
+          alert("No file selected.");
           return;
         }
 
@@ -208,14 +208,14 @@
           /\.(jpg|jpeg|png|gif)$/i.test(file.name);
 
         if (!isImage) {
-          console.error("The selected file is not an image.");
+          alert("The selected file is not an image.");
           return;
         }
 
         // Check the file size (in bytes)
         const maxSizeBytes = 2 * 1024 * 1024; // 10MB
         if (file.size > maxSizeBytes) {
-          console.error("File size exceeds the allowed limit (10MB).");
+          alert("File size exceeds the allowed limit (10MB).");
           return;
         }
 
@@ -240,7 +240,7 @@
             // Handle the server response
             window.location.reload();
           })
-          .catch((error) => console.error("Error:", error));
+          .catch((error) => alert("Error:", error));
       };
 
       Signup.addEventListener("submit", (e) => {
@@ -339,7 +339,7 @@
             C_industry.innerHTML = data?.Industry;
           }
         } catch (error) {
-          console.error("An error occurred:", error);
+          alert("An error occurred:", error);
         }
       };
       if (users?.C_id) {
