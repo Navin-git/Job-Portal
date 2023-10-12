@@ -196,8 +196,29 @@
         });
         return response.json();
       }
+      async function DeleteData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "DELETE",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
 
-      const deletprofile = () => {};
+      const deletprofile = () => {
+        DeleteData("http://localhost:9000/Company", {
+          C_id: users?.C_id,
+        }).then(() => {
+          window.location.reload();
+        });
+      };
 
       const handleProfileChange = (e) => {
         const file = e.target.files[0]; // Assuming it's a single file input
