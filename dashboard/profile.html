@@ -65,6 +65,7 @@
                 <img
                   src="https://images-eds-ssl.xboxlive.com/image?url=Q_rwcVSTCIytJ0KOzcjWTYl.n38D8jlKWXJx7NRJmQKBAEDCgtTAQ0JS02UoaiwRCHTTX1RAopljdoYpOaNfVf5nBNvbwGfyR5n4DAs0DsOwxSO9puiT_GgKqinHT8HsW8VYeiiuU1IG3jY69EhnsQ--&format=source"
                   alt=""
+                  id="profile_img"
                   style="width: 60px; height: auto"
                 />
               </div>
@@ -221,8 +222,8 @@
 
         // Create a FormData object to send the file
         const formData = new FormData();
-        formData.append("Logo", file); // Use the appropriate field name for your server
-        formData.append("C_id", users?.C_id);
+        formData.append("resume", file); // Use the appropriate field name for your server
+        formData.append("U_id", users?.C_id);
 
         // Fetch options for the POST request
         const options = {
@@ -338,6 +339,25 @@
             Type.value = data?.Industry;
             input.Type = data?.Industry;
             C_industry.innerHTML = data?.Industry;
+
+            const yourBlob = data?.Logo;
+
+            // Create a FileReader to read the Blob as a data URL
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+              // The result of the FileReader will be a data URL
+              const dataURL = event.target.result;
+
+              // Create an img element
+              const img = document.getElementById("profile_img");
+
+              // Set the src attribute of the img element to the data URL
+              img.src = dataURL;
+            };
+
+            // Read the Blob as a data URL
+            reader.readAsDataURL(yourBlob);
           }
         } catch (error) {
           alert("An error occurred:", error);
