@@ -75,7 +75,8 @@
             <input
               type="text"
               name=""
-              onchange="locationsearch(event)"
+              onchange="Locationchange(event)"
+              onkeyup="HandlelocationchangeKeyUp(event)"
               placeholder="location"
               style="
                 padding: 13px 20px;
@@ -512,23 +513,27 @@
       } else {
         showLess.style.display = "none";
       }
-    </script>
-    <script>
+
       const getData = async (e) => {
-        let users = JSON.parse(localStorage?.getItem("user"));
+        console.log(e);
         try {
-          const response = await fetch(`http://localhost:9000/JobsFilter`, {
-            method: "GET",
-            body: e,
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
-          });
+          const response = await fetch(
+            `http://localhost:9000/JobsFilter?location=${
+              e?.Location ?? ""
+            }&Job_type=${e?.Job_type ?? ""}`,
+            {
+              method: "GET",
+              // body: e,
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
 
           const data = await response.json();
           console.log(data);
@@ -537,18 +542,27 @@
         } catch (err) {
           // alert("An error occurred:", error);
         }
-        const locationchange = (e) => {
+      };
+      let locationtext;
+      const Locationchange = (e) => {
+        locationtext = e.target.value;
+      };
+      function HandlelocationchangeKeyUp(event) {
+        event = event || window.event;
+        if (event.keyCode === 13) {
           getData({
-            Location: e.target.value,
+            Location: locationtext,
           });
-        };
-        const typechange = (e) => {
-          getData({
-            Job_type: e.target.value,
-          });
-        };
+          // Add any desired actions to be taken when Enter is pressed
+        }
+      }
+      const typechange = (e) => {
+        getData({
+          Job_type: e.target.value,
+        });
       };
     </script>
+    <script></script>
     <script src="../script/nav.js"></script>
   </body>
 </html>
