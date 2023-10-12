@@ -201,30 +201,7 @@
       </p>
     </footer>
     <script>
-       const getData = async (e) => {
-        console.log(e);
-        try {
-          const response = await fetch(
-            `http://localhost:9000/JobsFilter?Location=${
-              e?.Location ?? ""
-            }&Job_type=${e?.Job_type ?? ""}`,
-            {
-              method: "GET",
-              // body: e,
-              mode: "cors",
-              cache: "no-cache",
-              credentials: "same-origin",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              redirect: "follow",
-              referrerPolicy: "no-referrer",
-            }
-          );
-
-          const data = await response.json();
-          console.log(data); 
-          let actId
+     let actId
           const jobCard = document.getElementsByClassName("job-card");
           const jobDetail = document.getElementsByClassName("job-detail");
           const showLess = document.getElementById("show-less");
@@ -257,6 +234,30 @@
               jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
               showLess.style.display = "flex";}
           }
+       const getData = async (e) => {
+        console.log(e);
+        try {
+          const response = await fetch(
+            `http://localhost:9000/JobsFilter?Location=${
+              e?.Location ?? ""
+            }&Job_type=${e?.Job_type ?? ""}`,
+            {
+              method: "GET",
+              // body: e,
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
+
+          const data = await response.json();
+          console.log(data); 
+         
           if (data) {
             const jobList = document.getElementById("job-list");
             console.log(jobList);
