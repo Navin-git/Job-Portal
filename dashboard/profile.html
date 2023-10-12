@@ -35,12 +35,14 @@
     <div style="flex: 1">
       <nav class="">
         <div>
-          <img
-            class="logo"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
-            alt="logo"
-            style="width: 40px"
-          />
+          <a href="/Index.html">
+            <img
+              class="logo"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
+              alt="logo"
+              style="width: 40px"
+            />
+          </a>
           <ul class="nav-log"></ul>
         </div>
       </nav>
@@ -231,6 +233,43 @@
           window.location.reload();
         });
       });
+      const getData = async () => {
+        let user = JSON.parse(localStorage?.getItem("user"));
+        try {
+          const response = await fetch(
+            `http://localhost:9000/CompanyProfile?C_id=${user?.U_id}`,
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
+
+          const data = await response.json();
+          console.log(data);
+          if (data) {
+            Name.value = data?.Company_name;
+            input.Email = data?.Email;
+            Email.value = data?.jobDetails?.Job_industry;
+            input.Name = data?.Company_name;
+            Address.value = data?.Main_address;
+            input.Address = data?.Main_address;
+            Industry.value = data?.Industry;
+            input.Type = data?.Industry;
+          }
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      };
+      if (user?.C_id) {
+        getData();
+      } else window.location.pathname = "/Index.html";
     </script>
     <script src="../script/dashnav.js"></script>
   </body>
