@@ -223,7 +223,40 @@
           );
 
           const data = await response.json();
-          console.log(data);
+          console.log(data); 
+          let actId
+          const jobCard = document.getElementsByClassName("job-card");
+          const jobDetail = document.getElementsByClassName("job-detail");
+          const showLess = document.getElementById("show-less");
+          let isDetailOpen = false;
+          // showLess.addEventListener("click", () => {
+          //   isDetailOpen = false;
+          //   jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
+          //   showLess.style.display = "none";
+          // });
+          // for (let i = 0; i < jobCard.length; i++) {
+          //   jobCard[i].addEventListener("click", () => {
+          //     console.log(jobDetail);
+          //     isDetailOpen = !isDetailOpen;
+          //     jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
+          //     showLess.style.display = "flex";
+          //   });
+          // }
+          if (isDetailOpen) {
+            showLess.style.display = "flex";
+          } else {
+            showLess.style.display = "none";
+          }
+          const handleOpen=(id)=>{
+             if(showLess){
+              isDetailOpen = false;
+            jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
+            showLess.style.display = "none";
+             }
+             else {isDetailOpen = !isDetailOpen;
+              jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
+              showLess.style.display = "flex";}
+          }
           if (data) {
             const jobList = document.getElementById("job-list");
             console.log(jobList);
@@ -231,6 +264,7 @@
             data?.map((item, index) => {
               jobList.innerHTML += `  <div class="job-card">
           <div
+          onclick={handleOpen(item?.J_id)}
             style="
               display: flex;
               gap: 10px;
@@ -312,28 +346,7 @@
       };
     </script>
     <script>
-      const jobCard = document.getElementsByClassName("job-card");
-      const jobDetail = document.getElementsByClassName("job-detail");
-      const showLess = document.getElementById("show-less");
-      let isDetailOpen = false;
-      showLess.addEventListener("click", () => {
-        isDetailOpen = false;
-        jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
-        showLess.style.display = "none";
-      });
-      for (let i = 0; i < jobCard.length; i++) {
-        jobCard[i].addEventListener("click", () => {
-          console.log(jobDetail);
-          isDetailOpen = !isDetailOpen;
-          jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
-          showLess.style.display = "flex";
-        });
-      }
-      if (isDetailOpen) {
-        showLess.style.display = "flex";
-      } else {
-        showLess.style.display = "none";
-      }
+     
     </script>
     <script src="../script/nav.js"></script>
   </body>
