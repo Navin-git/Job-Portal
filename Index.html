@@ -518,7 +518,7 @@
         console.log(e);
         try {
           const response = await fetch(
-            `http://localhost:9000/JobsFilter?location=${
+            `http://localhost:9000/JobsFilter?Location=${
               e?.Location ?? ""
             }&Job_type=${e?.Job_type ?? ""}`,
             {
