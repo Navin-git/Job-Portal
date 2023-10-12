@@ -69,6 +69,8 @@
                     width: 60px !important;
                     height: auto;
                     flex-shrink: 0 !important;
+                    height: 60px;
+                    object-fit: contain;
                   "
                 />
               </div>
@@ -217,7 +219,7 @@
         }
 
         // Check the file size (in bytes)
-        const maxSizeBytes = 2 * 1024 * 1024; // 10MB
+        const maxSizeBytes = 5 * 1024 * 1024; // 10MB
         if (file.size > maxSizeBytes) {
           alert("File size exceeds the allowed limit (10MB).");
           return;
@@ -344,19 +346,11 @@
             C_industry.innerHTML = data?.Industry;
 
             const yourBlob = data?.Comapny_logo;
-            const uint8Array = new Uint8Array(yourBlob);
 
-            // Create a Blob from the Uint8Array
-            const blob = new Blob([uint8Array]);
-
-            // Create a data URL from the Blob
-            const blobUrl = URL.createObjectURL(blob);
-            console.log(blobUrl);
-            // Create an img element
             let img = document.getElementById("profile_img");
 
             // Set the src attribute of the img element to the data URL
-            img.src = blobUrl;
+            img.src = yourBlob;
           }
         } catch (err) {
           // alert("An error occurred:", error);
