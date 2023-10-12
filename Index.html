@@ -457,7 +457,7 @@
           >
             <img
               src=${
-                item?.Company_logo ??
+                item?.Comapny_logo ??
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
               }
               alt=""
@@ -479,7 +479,7 @@
           </div>
           <h1  style="padding: 0 20px">${item?.Job_title}</h1>
           <p style="padding: 0 20px">
-            ${item?.Job_decs}
+            ${item?.Job_desc}
           </p>
           <div
             style="
@@ -498,7 +498,7 @@
             <div>Post date: ${item?.Post_date?.split("T")[0]}</div>
           </div>
           <div class="job-card-review">
-            <span>40 Open Position</span>
+            <span>${item?.Open_vacancy} Open Position</span>
             <i class="fa-solid fa-chevron-right"></i>
           </div>
         </div>`;
