@@ -59,9 +59,9 @@
                 />
               </div>
               <div style="display: flex; flex-direction: column; gap: 3px">
-                <h4>Disacord</h4>
-                <p>IT Company</p>
-                <p>Pokhara</p>
+                <h4 id="C_name">Disacord</h4>
+                <p id="C_industry">IT Company</p>
+                <p id="C_address">Pokhara</p>
               </div>
             </div>
             <div>
@@ -127,6 +127,9 @@
       </section>
     </div>
     <script>
+      const C_name = document.getElementById("C_name");
+      const C_industry = document.getElementById("C_industry");
+      const C_address = document.getElementById("C_address");
       const Name = document.getElementById("Name");
       const Email = document.getElementById("Email");
       const Phone = document.getElementById("Phone");
@@ -155,10 +158,10 @@
       Type.addEventListener("change", (e) => {
         input.Type = e.target.value;
       });
-
+      let user = JSON.parse(localStorage.getItem("user"));
       async function postData(url = "", data = {}) {
         const response = await fetch(url, {
-          method: "PUT",
+          method: user?.C_id ? "PUT" : "POST",
           mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
@@ -221,7 +224,7 @@
         // } else {
         //   Type_error.innerHTML = "";
         // }
-        let user = JSON.parse(localStorage.getItem("user"));
+
         postData("http://localhost:9000/Companyprofile", {
           C_id: user.C_id,
           Email: input.Email,
@@ -255,19 +258,21 @@
           console.log(data);
           if (data) {
             Name.value = data?.Company_name;
-            input.Email = data?.Email;
-            Email.value = data?.jobDetails?.Job_industry;
             input.Name = data?.Company_name;
+            C_name = data?.Company_name;
+            Email.value = data?.Email;
+            input.Email = data?.Email;
             Address.value = data?.Main_address;
             input.Address = data?.Main_address;
+            C_address = data?.Main_address;
             Industry.value = data?.Industry;
             input.Type = data?.Industry;
+            C_industry = data?.Industry;
           }
         } catch (error) {
           console.error("An error occurred:", error);
         }
       };
-      let user = JSON.parse(localStorage.getItem("user"));
       if (user?.C_id) {
         getData();
       } else window.location.pathname = "/Index.html";
