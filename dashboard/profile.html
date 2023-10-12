@@ -65,11 +65,15 @@
                 <img
                   alt=""
                   id="profile_img"
-                  style="width: 60px; height: auto"
+                  style="
+                    width: 60px !important;
+                    height: auto;
+                    flex-shrink: 0 !important;
+                  "
                 />
               </div>
               <div style="display: flex; flex-direction: column; gap: 3px">
-                <h4 id="C_name"></h4>
+                <h4 id="C_name">sadasd</h4>
                 <p id="C_industry"></p>
                 <p id="C_address"></p>
               </div>
@@ -339,24 +343,20 @@
             input.Type = data?.Industry;
             C_industry.innerHTML = data?.Industry;
 
-            const yourBlob = data?.Logo;
+            const yourBlob = data?.Comapny_logo;
+            const uint8Array = new Uint8Array(yourBlob);
 
-            // Create a FileReader to read the Blob as a data URL
-            const reader = new FileReader();
+            // Create a Blob from the Uint8Array
+            const blob = new Blob([uint8Array]);
 
-            reader.onload = function (event) {
-              // The result of the FileReader will be a data URL
-              const dataURL = event.target.result;
+            // Create a data URL from the Blob
+            const blobUrl = URL.createObjectURL(blob);
+            console.log(blobUrl);
+            // Create an img element
+            let img = document.getElementById("profile_img");
 
-              // Create an img element
-              const img = document.getElementById("profile_img");
-
-              // Set the src attribute of the img element to the data URL
-              img.src = dataURL;
-            };
-
-            // Read the Blob as a data URL
-            reader.readAsDataURL(yourBlob);
+            // Set the src attribute of the img element to the data URL
+            img.src = blobUrl;
           }
         } catch (err) {
           // alert("An error occurred:", error);
