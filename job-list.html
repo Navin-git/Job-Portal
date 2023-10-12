@@ -225,15 +225,11 @@
             showLess.style.display = "none";
           }
           const handleOpen=(id)=>{
-             if(showLess){
-              isDetailOpen = false;
-            jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
-            showLess.style.display = "none";
-             }
-             else {isDetailOpen = !isDetailOpen;
+            isDetailOpen = !isDetailOpen;
               jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
-              showLess.style.display = "flex";}
-          }
+              showLess.style.display = "flex";
+            }
+          
        const getData = async (e) => {
         console.log(e);
         try {
