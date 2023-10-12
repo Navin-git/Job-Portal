@@ -66,16 +66,35 @@
             flex-wrap: wrap;
           "
         >
-          <h1>Featured startups hiring now</h1>
+          <h1>Hiring now</h1>
           <div style="display: flex; gap: 20px; align-items: center">
-            <select name="" class="custom-select" placeholder="Location" id="">
+            <!-- <select name="" class="custom-select" placeholder="Location" id="">
               <option value="">Location</option>
-            </select>
-            <select name="" class="custom-select" placeholder="Location" id="">
+              <option value=""></option>
+            </select> -->
+            <input
+              type="text"
+              name=""
+              onchange="locationsearch(event)"
+              placeholder="location"
+              style="
+                padding: 13px 20px;
+                border-radius: 5px;
+                border: 1px solid #808080;
+                font-size: 16px;
+              "
+              id=""
+            />
+            <select
+              name=""
+              onchange="typechange(event)"
+              class="custom-select"
+              placeholder="Location"
+              id=""
+            >
               <option value="">Type</option>
-            </select>
-            <select name="" class="custom-select" placeholder="Location" id="">
-              <option value="">Location</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Full Time">Full Time</option>
             </select>
           </div>
         </div>
@@ -288,7 +307,7 @@
           </div>
         </div>
       </section>
-      <section style="padding: 0 20px">
+      <!-- <section style="padding: 0 20px">
         <h1>Trending jobs</h1>
         <div style="padding: 20px 0">
           <div
@@ -444,7 +463,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
       <section class="get-start">
         <img src="https://wellfound.com/images/jobs/gkutg%201.png" alt="" />
         <div class="get-start-dec">
@@ -473,6 +492,7 @@
       const jobCard = document.getElementsByClassName("job-card");
       const jobDetail = document.getElementsByClassName("job-detail");
       const showLess = document.getElementById("show-less");
+
       let isDetailOpen = false;
       showLess.addEventListener("click", () => {
         isDetailOpen = false;
@@ -492,6 +512,42 @@
       } else {
         showLess.style.display = "none";
       }
+    </script>
+    <script>
+      const getData = async (e) => {
+        let users = JSON.parse(localStorage?.getItem("user"));
+        try {
+          const response = await fetch(`http://localhost:9000/JobsFilter`, {
+            method: "GET",
+            body: e,
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+          });
+
+          const data = await response.json();
+          console.log(data);
+          if (data) {
+          }
+        } catch (err) {
+          // alert("An error occurred:", error);
+        }
+        const locationchange = (e) => {
+          getData({
+            Location: e.target.value,
+          });
+        };
+        const typechange = (e) => {
+          getData({
+            Job_type: e.target.value,
+          });
+        };
+      };
     </script>
     <script src="../script/nav.js"></script>
   </body>
