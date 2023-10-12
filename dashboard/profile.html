@@ -216,7 +216,8 @@
         DeleteData("http://localhost:9000/Company", {
           C_id: users?.C_id,
         }).then(() => {
-          window.location.reload();
+          localStorage.clear();
+          window.location.pathname("/Index.html");
         });
       };
 
