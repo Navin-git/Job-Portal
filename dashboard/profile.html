@@ -221,7 +221,8 @@
 
         // Create a FormData object to send the file
         const formData = new FormData();
-        formData.append("profileImage", file); // Use the appropriate field name for your server
+        formData.append("Logo", file); // Use the appropriate field name for your server
+        formData.append("C_id", users?.C_id);
 
         // Fetch options for the POST request
         const options = {
