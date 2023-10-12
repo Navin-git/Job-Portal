@@ -456,9 +456,11 @@
             "
           >
             <img
-              src="https://photos.wellfound.com/startups/i/90183-bed46f22aafe8af7dc65cdd73fff2f76-medium_jpg.jpg?buster=1620918177"
+              src=${date?.Company_logo}
               alt=""
-              style="width: 50px; border-radius: 5px"
+              style="width: 50px; border-radius: 5px;  flex-shrink: 0 !important;
+                    height: 60px;
+                    object-fit: contain;"
             />
             <div
               style="
@@ -468,13 +470,12 @@
                 padding: 0 20px;
               "
             >
-              <h4>Discord</h4>
-              <p>501-1000 employees</p>
+              <h4>${data?.Company_name}</h4>
+              <p>${data?.Industry}</p>
             </div>
           </div>
           <p style="padding: 0 20px">
-            Our mission is to create a world where everyone has access to the
-            food they love and more
+            ${data?.Job_decs}
           </p>
           <div
             style="
@@ -484,9 +485,13 @@
               padding: 0 20px;
             "
           >
-          <div style="display: flex; gap: 10px;">Salary: <span class="tag">55000</span></div>
-            <div style="display: flex; gap: 10px;">Job Tab: <span class="tag">full time</span></div>
-            <div>Post date: 2022-05-05</div>
+          <div style="display: flex; gap: 10px;">Salary: <span class="tag">${
+            data?.Main_address
+          }</span></div>
+            <div style="display: flex; gap: 10px;">Job Tab: <span class="tag">${
+              data?.Job_type
+            }</span></div>
+            <div>Post date: ${data?.Post_date?.split("T")[0]}</div>
           </div>
           <div class="job-card-review">
             <span>40 Open Position</span>
