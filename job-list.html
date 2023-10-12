@@ -281,7 +281,7 @@
             <div>Post date: ${item?.Post_date?.split("T")[0]}</div>
           </div>
           <div class="job-card-review">
-            <span>${item?.Open_vacancy} Open Position</span>
+            <span>${item?.Open_vacency??0} Open Position</span>
             <i class="fa-solid fa-chevron-right"></i>
           </div>
         </div>`;
