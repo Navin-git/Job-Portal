@@ -259,15 +259,15 @@
           if (data) {
             Name.value = data?.Company_name;
             input.Name = data?.Company_name;
-            C_name = data?.Company_name;
+            C_name.innerHTML = data?.Company_name;
             Email.value = data?.Email;
             input.Email = data?.Email;
             Address.value = data?.Main_address;
             input.Address = data?.Main_address;
-            C_address = data?.Main_address;
+            C_address.innerHTML = data?.Main_address;
             Industry.value = data?.Industry;
             input.Type = data?.Industry;
-            C_industry = data?.Industry;
+            C_industry.innerHTML = data?.Industry;
           }
         } catch (error) {
           console.error("An error occurred:", error);
