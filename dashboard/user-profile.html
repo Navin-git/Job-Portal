@@ -374,7 +374,7 @@
         const data = await response.json();
         console.log(data);
         if (data) {
-          document.getElementById("resume").src = data;
+          document.getElementById("resume").src = data?.Resume;
         }
       };
 
