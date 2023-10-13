@@ -551,35 +551,33 @@
       const ontitlechange = (e) => {
         searchvalue = e.target.value;
       };
-      const HandleSearch = (e) => {
-        e.preventDefault();
-        const getsearch = async (search) => {
-          try {
-            const response = await fetch(
-              `http://localhost:9000/JobsSearch?search=${search}`,
-              {
-                method: "GET",
-                mode: "cors",
-                cache: "no-cache",
-                credentials: "same-origin",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                redirect: "follow",
-                referrerPolicy: "no-referrer",
-              }
-            );
+      const getsearch = async (search) => {
+        try {
+          const response = await fetch(
+            `http://localhost:9000/JobsSearch?search=${search}`,
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
 
-            const data = await response.json();
-            console.log(data);
-            if (data) {
-              const jobList = document.getElementById("job-list");
-              console.log(jobList);
-              jobList.innerHTML = "";
-              data?.map((item, index) => {
-                jobList.innerHTML += `  <div class="job-card"  onclick={handleOpen(${
-                  item?.J_id
-                })}>
+          const data = await response.json();
+          console.log(data);
+          if (data) {
+            const jobList = document.getElementById("job-list");
+            console.log(jobList);
+            jobList.innerHTML = "";
+            data?.map((item, index) => {
+              jobList.innerHTML += `  <div class="job-card"  onclick={handleOpen(${
+                item?.J_id
+              })}>
                 <div
                   style="
                     display: flex;
@@ -635,13 +633,16 @@
                   <i class="fa-solid fa-chevron-right"></i>
                 </div>
               </div>`;
-                return;
-              });
-            }
-          } catch (error) {
-            console.error("An error occurred:", error);
+              return;
+            });
           }
-        };
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      };
+
+      const HandleSearch = (e) => {
+        e.preventDefault();
         if (searchvalue) {
           getsearch(searchvalue);
         }
