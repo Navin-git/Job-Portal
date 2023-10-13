@@ -256,7 +256,7 @@
     <script>
       let actId;
       const jobCard = document.getElementsByClassName("job-card");
-      const jobDetail = document.getElementsByClassName("job-detail");
+      const jobDetail = document.getElementsById("job-detail");
       let isDetailOpen = false;
       // showLess.addEventListener("click", () => {
       //   isDetailOpen = false;
@@ -402,14 +402,14 @@
         actId = id;
         getDataById(id);
         isDetailOpen = !isDetailOpen;
-        jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
+        jobDetail.style.width = isDetailOpen ? "50%" : 0;
       };
 
       for (let i = 0; i < jobCard.length; i++) {
         jobCard[i].addEventListener("click", () => {
           console.log(jobDetail);
           isDetailOpen = !isDetailOpen;
-          jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
+          jobDetail.style.width = isDetailOpen ? "50%" : 0;
         });
       }
 
