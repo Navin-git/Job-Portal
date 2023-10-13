@@ -96,6 +96,11 @@
           const jobCard = document.getElementsByClassName("job-card");
           const jobDetail = document.getElementsByClassName("job-detail");
           let isDetailOpen = false;
+          let showDetail = true;
+      const handleclose = () => {
+        showDetail = false;
+        document.getElementById("job-detail").innerHTML = "";
+      };
           // showLess.addEventListener("click", () => {
           //   isDetailOpen = false;
           //   jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
