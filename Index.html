@@ -321,9 +321,9 @@
                   />
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 3px">
-                  <h4>${data?.jobDetails?.Company_name}</h4>
-                  <p>${data?.jobDetails?.Industry}</p>
-                  <p>${data?.jobDetails?.Main_address}</p>
+                  <h4>${data?.jobDetails?.Company_name ?? ""}</h4>
+                  <p>${data?.jobDetails?.Job_Industry ?? ""}</p>
+                  <p>${data?.jobDetails?.Main_address ?? ""}</p>
                 </div>
               </div>
               <button class="btn">Apply</button>
@@ -332,18 +332,18 @@
             <div style="display: flex; gap: 20px">
               <div>
                 <h5>Posted date</h5>
-                <p>${data?.jobDetails?.Post_date?.split("T")[0]}</p>
+                <p>${data?.jobDetails?.Post_date?.split("T")[0] ?? ""}</p>
               </div>
               <div>
                 <h5>Due date</h5>
-                <p>${data?.jobDetails?.Due_date?.split("T")[0]}</p>
+                <p>${data?.jobDetails?.Due_date?.split("T")[0] ?? ""}</p>
               </div>
             </div>
             <br />
-            <h3>${data?.jobDetails?.Job_title}</h3>
+            <h3>${data?.jobDetails?.Job_title ?? ""}</h3>
             <br />
             <p>
-             ${data?.jobDetails?.Job_desc}
+             ${data?.jobDetails?.Job_desc ?? ""}
             </p>
             <br />
             <h4>Industry</h4>
@@ -355,7 +355,7 @@
                 flex-direction: column;
               "
             >
-              <p>${data?.jobDetails?.Job_Industry}</p>
+              <p>${data?.jobDetails?.Job_Industry ?? ""}</p>
             </div>
             <br />
             <h4>Job Roles</h4>
