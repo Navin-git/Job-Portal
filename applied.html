@@ -379,7 +379,7 @@
       const getFirstData = async () => {
         try {
           const response = await fetch(
-            `http://localhost:9000/ApplicationStatus`,
+            `http://localhost:9000/ApplicationStatus?U_id=${U_user?.U_id}`,
             {
               method: "GET",
               // body: e,
