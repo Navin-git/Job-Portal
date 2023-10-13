@@ -289,11 +289,18 @@
 
           const data = await response.json();
           console.log(data);
+          let show;
+          const handleclose = () => {
+            show = false;
+          };
           if (data) {
+            show = true;
             document.getElementById(
               "job-detail"
-            ).innerHTML = ` <div class="job-detail">
-          <button id="show-less" class="show-detail">&#10005</button>
+            ).innerHTML = ` <div style="width: ${
+              show ? "100%" : "0"
+            }" class="job-detail">
+          <button onclick={handleclose()} class="show-detail">&#10005</button>
           <div
             style="
               overflow-y: scroll;
