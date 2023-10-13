@@ -361,6 +361,17 @@
           console.log(data); // JSON data parsed by `data.json()` call
           // window.location.reload();
         })
+
+        await postData("http://localhost:9000/EducationDetails", {
+          U_id: JSON.parse(localStorage?.getItem("user"))?.U_id,
+          School_name:input?.School,
+          School_passoutyear:input?.School_Passout,
+          College_name:input?.PlussTwo,
+          College_passoutyear:input?.Passout,
+        },"POST").then((data) => {
+          console.log(data); // JSON data parsed by `data.json()` call
+          window.location.reload();
+        })
       };
       let Skill_List = [];
       function handleRoleKeyUp(event) {
@@ -410,9 +421,13 @@
             // data.Prefered_Job_Type || "";
             // Prefered_jobtitle.value = data.Prefered_jobtitle || "";
             School.value = data.School_name || "";
+            input.School = data.School_name || "";
             School_Passout.value = data.School_passoutyear || "";
+            input.School_Passout = data.School_passoutyear || "";
             PlussTwo.value = data.College_name || "";
+            input.PlussTwo = data.College_name || "";
             Passout.value = data.College_passoutyear || "";
+            input.Passout = data.College_passoutyear || "";
             // Skill_List = data?.userSkills
             //   ?.filter((i) => i.SK_id)
             //   .map((item) => {
