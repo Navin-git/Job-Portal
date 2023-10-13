@@ -93,14 +93,14 @@
               id="Phone-error"
             ></p>
           </div>
-          <div class="input-div">
+          <!-- <div class="input-div">
             <label for="Type">Type</label>
             <input type="text" name="" readonly id="Type" />
             <p
               style="font-size: small; margin-left: 10px; color: red"
               id="Type-error"
             ></p>
-          </div>
+          </div> -->
           <div class="input-div">
             <label for="DOB">DOB</label>
             <input type="text" name="" readonly id="DOB" />
@@ -173,67 +173,6 @@
               id="Passout-error"
             ></p>
           </div>
-          <div class="input-div">
-            <label for="College-Undergraduate">College Undergraduate</label>
-            <input type="text" name="" readonly id="College-Undergraduate" />
-            <p
-              style="font-size: small; margin-left: 10px; color: red"
-              id="College-Undergraduate-error"
-            ></p>
-          </div>
-          <div class="input-div">
-            <label for="College-Undergraduate-Course"
-              >College Undergraduate Course</label
-            >
-            <input
-              type="text"
-              name=""
-              readonly
-              id="College-Undergraduate-Course"
-            />
-            <p
-              style="font-size: small; margin-left: 10px; color: red"
-              id="College-Undergraduate-Course-error"
-            ></p>
-          </div>
-          <div class="input-div">
-            <label for="College-Postgraduate">College Postgraduate</label>
-            <input type="text" name="" readonly id="College-Postgraduate" />
-            <p
-              style="font-size: small; margin-left: 10px; color: red"
-              id="College-Postgraduate-error"
-            ></p>
-          </div>
-          <div class="input-div">
-            <label for="College-Postgraduate-Course"
-              >College Postgraduate Course</label
-            >
-            <input
-              type="text"
-              name=""
-              readonly
-              id="College-Postgraduate-Course"
-            />
-            <p
-              style="font-size: small; margin-left: 10px; color: red"
-              id="College-Postgraduate-Course-error"
-            ></p>
-          </div>
-          <div class="input-div">
-            <label for="College-Postgraduate-Passout"
-              >College Postgraduate Passout</label
-            >
-            <input
-              type="text"
-              name=""
-              readonly
-              id="College-Postgraduate-Passout"
-            />
-            <p
-              style="font-size: small; margin-left: 10px; color: red"
-              id="College-Postgraduate-Passout-error"
-            ></p>
-          </div>
 
           <div></div>
           <button style="margin-left: auto" class="btn">Submit</button>
@@ -254,28 +193,14 @@
       const School_Passout = document.getElementById("School-Passout");
       const PlussTwo = document.getElementById("12School");
       const Passout = document.getElementById("Passout");
-      const College_Undergraduate = document.getElementById(
-        "College-Undergraduate"
-      );
-      const College_Undergraduate_Course = document.getElementById(
-        "College-Undergraduate-Course"
-      );
-      const College_Postgraduate = document.getElementById(
-        "College-Postgraduate"
-      );
-      const College_Postgraduate_Course = document.getElementById(
-        "College-Postgraduate-Course"
-      );
-      const College_Postgraduate_Passout = document.getElementById(
-        "College-Postgraduate-Passout"
-      );
-      const Type = document.getElementById("Type");
+
+      // const Type = document.getElementById("Type");
       const Signup = document.getElementById("profile-form");
       const Email_error = document.getElementById("Email-error");
       const Name_error = document.getElementById("Name-error");
       const Phone_error = document.getElementById("Phone-error");
       const Address_error = document.getElementById("Address-error");
-      const Type_error = document.getElementById("Type-error");
+      // const Type_error = document.getElementById("Type-error");
       let input = {};
       Name.addEventListener("change", (e) => {
         input.Name = e.target.value;
@@ -289,9 +214,9 @@
       Address.addEventListener("change", (e) => {
         input.Address = e.target.value;
       });
-      Type.addEventListener("change", (e) => {
-        input.Type = e.target.value;
-      });
+      // Type.addEventListener("change", (e) => {
+      //   input.Type = e.target.value;
+      // });
       DOB.addEventListener("change", (e) => {
         input.DOB = e.target.value;
       });
@@ -312,21 +237,6 @@
       });
       Passout.addEventListener("change", (e) => {
         input.Passout = e.target.value;
-      });
-      College_Undergraduate.addEventListener("change", (e) => {
-        input.College_Undergraduate = e.target.value;
-      });
-      College_Undergraduate_Course.addEventListener("change", (e) => {
-        input.College_Undergraduate_Course = e.target.value;
-      });
-      College_Postgraduate.addEventListener("change", (e) => {
-        input.College_Postgraduate = e.target.value;
-      });
-      College_Postgraduate_Course.addEventListener("change", (e) => {
-        input.College_Postgraduate_Course = e.target.value;
-      });
-      College_Postgraduate_Passout.addEventListener("change", (e) => {
-        input.College_Postgraduate_Passout = e.target.value;
       });
 
       async function postData(url = "", data = {}) {
@@ -431,6 +341,18 @@
           const data = await response.json();
           console.log(data);
           if (data) {
+            Name.value = data?.userDetails?.FullName || "";
+            Email.value = data?.userDetails?.Email || "";
+            DOB.value = data?.userDetails?.DOB || "";
+            Address.value = data?.userDetails?.Address || "";
+            Prefered_Salary.value = data?.userDetails?.Prefered_salary || "";
+            Prefered_Job_Type.value =
+              data?.userDetails?.Prefered_Job_Type || "";
+            // Prefered_jobtitle.value = data?.userDetails?.Prefered_jobtitle || "";
+            School.value = data?.userDetails?.School_name || "";
+            School_Passout.value = data?.userDetails?.School_passoutyear || "";
+            PlussTwo.value = data?.userDetails?.College_name || "";
+            Passout.value = data?.userDetails?.College_passoutyear || "";
           }
         } catch (err) {
           // alert("An error occurred:", error);
