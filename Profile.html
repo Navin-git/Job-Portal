@@ -349,10 +349,10 @@
         await  postData("http://localhost:9000/Skills", {
           U_id: JSON.parse(localStorage?.getItem("user"))?.U_id,
           skills: Skill_List,
-        }).then((data) => {
+        },"POST").then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
           // window.location.reload();
-        },"POST");
+        });
       };
       let Skill_List = [];
       function handleRoleKeyUp(event) {
