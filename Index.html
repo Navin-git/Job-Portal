@@ -273,9 +273,7 @@
       let showDetail = true;
       const handleclose = () => {
         showDetail = false;
-        document.getElementById("job-detail").style.width = showDetail
-          ? "100%"
-          : "0";
+        document.getElementById("job-detail").innerHTML = "";
       };
       const getDataById = async (id) => {
         try {
