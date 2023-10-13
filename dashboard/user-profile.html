@@ -48,19 +48,19 @@
         </div>
       </nav>
       <form id="profile-form" class="profile-sec">
-        <h3>My profile</h3>
+        <h3>User profile</h3>
         <div class="profile-img-card">
           <div style="display: flex; align-items: center; gap: 20px">
-            <div>
+            <!-- <div>
               <img
                 src="https://images-eds-ssl.xboxlive.com/image?url=Q_rwcVSTCIytJ0KOzcjWTYl.n38D8jlKWXJx7NRJmQKBAEDCgtTAQ0JS02UoaiwRCHTTX1RAopljdoYpOaNfVf5nBNvbwGfyR5n4DAs0DsOwxSO9puiT_GgKqinHT8HsW8VYeiiuU1IG3jY69EhnsQ--&format=source"
                 alt=""
                 style="width: 60px; height: auto"
               />
-            </div>
+            </div> -->
             <div style="display: flex; flex-direction: column; gap: 3px">
-              <h4>Disacord</h4>
-              <p>IT Company</p>
+              <h4 id="U_name">Disacord</h4>
+              <p id="ee">IT Company</p>
               <p>Pokhara</p>
             </div>
           </div>
@@ -242,6 +242,7 @@
     </div>
 
     <script>
+      const params = new URLSearchParams(window.location.search);
       const Name = document.getElementById("Name");
       const Email = document.getElementById("Email");
       const Phone = document.getElementById("Phone");
@@ -407,6 +408,37 @@
           window.location.reload();
         });
       });
+      const getData = async () => {
+        let users = JSON.parse(localStorage?.getItem("user"));
+        try {
+          const response = await fetch(
+            `http://localhost:9000/userProfileByCompany?U_id=${params.get(
+              "U_id"
+            )}`,
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
+
+          const data = await response.json();
+          console.log(data);
+          if (data) {
+          }
+        } catch (err) {
+          // alert("An error occurred:", error);
+        }
+      };
+      if (params.get("U_id")) {
+        getData();
+      } else window.location.pathname = "/Index.html";
     </script>
     <script src="../script/nav.js"></script>
   </body>
