@@ -301,9 +301,8 @@
             "-" +
             String(new Date().getDate()).padStart(2, "0"),
           status: "in-process",
-        }).then((data) => {
-          console.log(data); // JSON data parsed by `data.json()` call
-          window.location.pathname = "/dashboard/job-list.html";
+        }).then(() => {
+          window.location.reload();
         });
       };
       const getDataById = async (id) => {
