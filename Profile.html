@@ -60,7 +60,13 @@
           </div>
         </div>
         <div>
-          <!-- <button class="outline-btn">Edit</button> -->
+          <label class="outline-btn" for="profile_input">Choose Logo</label>
+          <input
+            type="file"
+            id="profile_input"
+            onchange="handleProfileChange(event)"
+            hidden
+          />
         </div>
       </div>
       <div class="profile-form">
@@ -438,6 +444,48 @@
         } catch (err) {
           // alert("An error occurred:", error);
         }
+      };
+
+      const handleProfileChange = (e) => {
+        const file = e.target.files[0]; // Assuming it's a single file input
+
+        // Check if a file was selected
+        if (!file) {
+          alert("No file selected.");
+          return;
+        }
+
+
+        // Check the file size (in bytes)
+        const maxSizeBytes = 5 * 1024 * 1024; // 10MB
+        if (file.size > maxSizeBytes) {
+          alert("File size exceeds the allowed limit (10MB).");
+          return;
+        }
+
+        // Create a FormData object to send the file
+        const formData = new FormData();
+        formData.append("resume", file); // Use the appropriate field name for your server
+        formData.append("U_id", JSON.parse(localStorage?.getItem("user"))?.U_id);
+
+        // Fetch options for the POST request
+        const options = {
+          method: "POST",
+          body: formData,
+        };
+
+        fetch("http://localhost:9000/Resume", options)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then(() => {
+            // Handle the server response
+            window.location.reload();
+          })
+          .catch((error) => alert("Error:", error));
       };
       
       const GetSkills = async () => {
