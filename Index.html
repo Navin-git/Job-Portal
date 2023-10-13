@@ -401,18 +401,18 @@
         actId = id;
         getDataById(id);
         isDetailOpen = !isDetailOpen;
-        document.getElementById("job-detail").style.width = isDetailOpen
-          ? "50%"
-          : 0;
+        // document.getElementById("job-detail").style.width = isDetailOpen
+        //   ? "50%"
+        //   : 0;
       };
 
-      for (let i = 0; i < jobCard.length; i++) {
-        jobCard[i].addEventListener("click", () => {
-          console.log(jobDetail);
-          isDetailOpen = !isDetailOpen;
-          jobDetail.style.width = isDetailOpen ? "50%" : 0;
-        });
-      }
+      // for (let i = 0; i < jobCard.length; i++) {
+      //   jobCard[i].addEventListener("click", () => {
+      //     console.log(jobDetail);
+      //     isDetailOpen = !isDetailOpen;
+      //     jobDetail.style.width = isDetailOpen ? "50%" : 0;
+      //   });
+      // }
 
       const getData = async () => {
         try {
