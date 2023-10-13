@@ -92,7 +92,7 @@
       }
 
       const accept = (A_id, status) => {
-        postData(`http://localhost:9000/Application`, {
+        postData(`http://localhost:9000/UpdateApplication`, {
           A_id: A_id,
           Status: status,
         }).then(() => {
@@ -130,10 +130,10 @@
                 <div style="display: flex; gap: 10px; width: fit-content">
                   <button onclick="accept(${
                     item?.A_id
-                  }, "accepted")" class="outline-btn">Accept</button>
+                  }, ${"accepted"})" class="outline-btn">Accept</button>
                   <button onclick="accept(${
                     item?.A_id
-                  }, "rejected")" style="width: fit-content" class="btn">Reject</button>
+                  }, ${"rejected"})" style="width: fit-content" class="btn">Reject</button>
                 </div>
               </td>
             </tr>`;
