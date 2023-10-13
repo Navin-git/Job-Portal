@@ -56,6 +56,7 @@
       >
         <h1>Applied jobs</h1>
       </div>
+      <div id="job-detail"></div>
       <div id="job-list" class="job-list"></div>
     </section>
     <footer>
@@ -71,65 +72,398 @@
       </p>
     </footer>
     <script>
-      const jobList = document.getElementById("job-list");
-      console.log(jobList);
-      [1, 2, 3, 4, 5].map((date, index) => {
-        console.log("hello");
-        jobList.innerHTML += ` <div class="job-card">
-          <div
-            style="
-              display: flex;
-              gap: 10px;
-              align-items: center;
-              padding: 0 20px;
-            "
-          >
-            <img
-              src="https://photos.wellfound.com/startups/i/90183-bed46f22aafe8af7dc65cdd73fff2f76-medium_jpg.jpg?buster=1620918177"
-              alt=""
-              style="width: 50px; border-radius: 5px"
-            />
-            <div
-              style="
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                padding: 0 20px;
-              "
-            >
-              <h4>Discord</h4>
-              <p>501-1000 employees</p>
-            </div>
-          </div>
-          <p style="padding: 0 20px">
-            Our mission is to create a world where everyone has access to the
-            food they love and more
-          </p>
-          <div
-            style="
-              display: flex;
-              flex-direction: column;
-              gap: 10px;
-              padding: 0 20px;
-            "
-          >
-            <div style="display: flex; gap: 10px;">Salary: <span class="tag">55000</span></div>
-            <div style="display: flex; gap: 10px;">Job Tab: <span class="tag">full time</span></div>
-            <div>Post date: 2022-05-05</div>
-          </div>
-          <div class="job-card-review">
-            <span>40 Open Position</span>
-            <div class="tag">${
-              index % 3 === 0
-                ? "PROCESS"
-                : index % 2 === 0
-                ? "ACCEPTED"
-                : "REJECTED"
-            }</div>
-          </div>
-        </div>`;
-        return;
-      });
+      let actId;
+      const jobCard = document.getElementsByClassName("job-card");
+      let isDetailOpen = false;
+      let showDetail = true;
+      let U_user = JSON.parse(localStorage?.getItem("user"));
+      const handleclose = () => {
+        showDetail = false;
+        document.getElementById("job-detail").innerHTML = "";
+      };
+      // showLess.addEventListener("click", () => {
+      //   isDetailOpen = false;
+      //   jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
+      //   showLess.style.display = "none";
+      // });
+      // for (let i = 0; i < jobCard.length; i++) {
+      //   jobCard[i].addEventListener("click", () => {
+      //     console.log(jobDetail);
+      //     isDetailOpen = !isDetailOpen;
+      //     jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
+      //     showLess.style.display = "flex";
+      //   });
+      // }
+      async function postData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+
+      const apply = (J_id) => {
+        postData(`http://localhost:9000/Application`, {
+          J_id: J_id,
+          U_id: U_user?.U_id,
+          Apply_date:
+            new Date().getFullYear() +
+            "-" +
+            (new Date().getMonth() + 1).toString().padStart(2, "0") +
+            "-" +
+            String(new Date().getDate()).padStart(2, "0"),
+          Status: "in-process",
+        }).then(() => {
+          window.location.reload();
+        });
+      };
+
+      const getDataById = async (id) => {
+        try {
+          const response = await fetch(
+            `http://localhost:9000/JobsDetails?J_id=${id}`,
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
+
+          const data = await response.json();
+          console.log(data);
+
+          if (data) {
+            document.getElementById(
+              "job-detail"
+            ).innerHTML = ` <div class="job-detail">
+                     <button id="show-detail" onclick={handleclose()} class="show-detail">&#10005</button>
+                     <div
+                       style="
+                         overflow-y: scroll;
+                         height: calc(100vh - 90px) !important;
+                         padding: 0px 20px 20px 20px;
+                       "
+                     >
+                       <div
+                         style="
+                           display: flex;
+                           justify-content: space-between;
+                           align-items: center;
+                         "
+                         class="profile-img-card"
+                       >
+                         <div style="display: flex; align-items: center; gap: 20px">
+                           <div>
+                             <img
+                               src=${
+                                 data?.jobDetails?.Comapny_logo ??
+                                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
+                               }
+                               alt=""
+                               style="width: 50px;
+                       border-radius: 5px;
+                       flex-shrink: 0 !important;
+                       height: 60px;
+                       object-fit: contain;"
+                             />
+                           </div>
+                           <div style="display: flex; flex-direction: column; gap: 3px">
+                             <h4>${data?.jobDetails?.Company_name ?? ""}</h4>
+                             <p>${data?.jobDetails?.Job_industry ?? ""}</p>
+                             <p>${data?.jobDetails?.Main_address ?? ""}</p>
+                           </div>
+                         </div>
+                       </div>
+                       <br />
+                       <div style="display: flex; gap: 20px">
+                         <div>
+                           <h5>Posted date</h5>
+                           <p>${
+                             data?.jobDetails?.Post_date?.split("T")[0] ?? ""
+                           }</p>
+                         </div>
+                         <div>
+                           <h5>Due date</h5>
+                           <p>${
+                             data?.jobDetails?.Due_date?.split("T")[0] ?? ""
+                           }</p>
+                         </div>
+                       </div>
+                       <br />
+                       <h3>${data?.jobDetails?.Job_title ?? ""}</h3>
+                       <br />
+                       <p>
+                       ${data?.jobDetails?.Job_desc ?? ""}
+                       </p>
+                       <br />
+                       <h4>Industry</h4>
+                       <div
+                         style="
+                           display: flex;
+                           gap: 10px;
+                           margin-top: 10px;
+                           flex-direction: column;
+                         "
+                       >
+                         <p>${data?.jobDetails?.Job_industry ?? ""}</p>
+                       </div>
+                       <br />
+                       <h4>Job Roles</h4>
+                       <div
+                         style="
+                           display: flex;
+                           gap: 10px;
+                           margin-top: 10px;
+                           font-size: large;
+                         "
+                       >
+                         ${data?.jobRoles?.map(
+                           (i) => `<div class="tag">${i?.roles}</div>`
+                         )}
+                       </div>
+                       <br />
+                       <h4>Requirements</h4>
+                       <div
+                         style="
+                           display: flex;
+                           gap: 10px;
+                           margin-top: 10px;
+                           flex-direction: column;
+                         "
+                       >
+                       ${data?.eduReq?.map((i) => `<p>${i?.Requirements}</p>`)}
+ 
+                       </div>
+                     </div>
+                   </div>`;
+          }
+        } catch (err) {
+          console.log("An error occurred:", err);
+        }
+      };
+
+      const handleOpen = (id) => {
+        actId = id;
+        getDataById(id);
+        isDetailOpen = !isDetailOpen;
+        // document.getElementById("job-detail").style.width = isDetailOpen
+        //   ? "50%"
+        //   : 0;
+      };
+
+      const getData = async (e) => {
+        console.log(e);
+        try {
+          const response = await fetch(
+            `http://localhost:9000/ApplicationStatus`,
+            {
+              method: "GET",
+              // body: e,
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
+
+          const data = await response.json();
+          console.log(data);
+
+          if (data) {
+            const jobList = document.getElementById("job-list");
+            console.log(jobList);
+            jobList.innerHTML = "";
+            data?.map((item, index) => {
+              jobList.innerHTML += `  <div class="job-card"  onclick={handleOpen(${
+                item?.J_id
+              })}>
+                 <div
+                   style="
+                     display: flex;
+                     gap: 10px;
+                     align-items: center;
+                     padding: 0 20px;
+                   "
+                 >
+                   <img
+                     src=${
+                       item?.Comapny_logo ??
+                       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
+                     }
+                     alt=""
+                     style="width: 50px; border-radius: 5px;  flex-shrink: 0 !important;
+                           height: 60px;
+                           object-fit: contain;"
+                   />
+                   <div
+                     style="
+                       display: flex;
+                       flex-direction: column;
+                       gap: 10px;
+                       padding: 0 20px;
+                     "
+                   >
+                     <h4>${item?.Company_name}</h4>
+                     <p>${item?.Industry}</p>
+                   </div>
+                 </div>
+                 <h1  style="padding: 0 20px">${item?.Job_title}</h1>
+                 <p style="padding: 0 20px">
+                   ${item?.Job_desc}
+                 </p>
+                 <div
+                   style="
+                     display: flex;
+                     flex-direction: column;
+                     gap: 10px;
+                     padding: 0 20px;
+                   "
+                 >
+                 <div style="display: flex; gap: 10px;">Location: <span class="tag">${
+                   item?.Main_address
+                 }</span></div>
+                   <div style="display: flex; gap: 10px;">Job Tab: <span class="tag">${
+                     item?.Job_type
+                   }</span></div>
+                   <div>Post date: ${item?.Post_date?.split("T")[0]}</div>
+                 </div>
+                 <div class="job-card-review">
+                   <span>${item?.Open_vacency} Open Position</span>
+                   <i class="fa-solid fa-chevron-right"></i>
+                 </div>
+               </div>`;
+              return;
+            });
+          }
+        } catch (err) {
+          // alert("An error occurred:", error);
+        }
+      };
+      let locationtext;
+      const Locationchange = (e) => {
+        locationtext = e.target.value;
+      };
+      function HandlelocationchangeKeyUp(event) {
+        event = event || window.event;
+        if (event.keyCode === 13) {
+          getData({
+            Location: locationtext,
+          });
+          // Add any desired actions to be taken when Enter is pressed
+        }
+      }
+      const typechange = (e) => {
+        getData({
+          Job_type: e.target.value,
+        });
+      };
+
+      const getFirstData = async () => {
+        try {
+          const response = await fetch(`http://localhost:9000/`, {
+            method: "GET",
+            // body: e,
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+          });
+
+          const data = await response.json();
+          console.log(data);
+          if (data) {
+            const jobList = document.getElementById("job-list");
+            console.log(jobList);
+            jobList.innerHTML = "";
+            data?.map((item, index) => {
+              jobList.innerHTML += `  <div class="job-card"  onclick={handleOpen(${
+                item?.J_id
+              })}>
+                 <div
+                   style="
+                     display: flex;
+                     gap: 10px;
+                     align-items: center;
+                     padding: 0 20px;
+                   "
+                 >
+                   <img
+                     src=${
+                       item?.Comapny_logo ??
+                       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
+                     }
+                     alt=""
+                     style="width: 50px; border-radius: 5px;  flex-shrink: 0 !important;
+                           height: 60px;
+                           object-fit: contain;"
+                   />
+                   <div
+                     style="
+                       display: flex;
+                       flex-direction: column;
+                       gap: 10px;
+                       padding: 0 20px;
+                     "
+                   >
+                     <h4>${item?.Company_name}</h4>
+                     <p>${item?.Industry}</p>
+                   </div>
+                 </div>
+                 <h1  style="padding: 0 20px">${item?.Job_title}</h1>
+                 <p style="padding: 0 20px">
+                   ${item?.Job_desc}
+                 </p>
+                 <div
+                   style="
+                     display: flex;
+                     flex-direction: column;
+                     gap: 10px;
+                     padding: 0 20px;
+                   "
+                 >
+                 <div style="display: flex; gap: 10px;">Location: <span class="tag">${
+                   item?.Main_address
+                 }</span></div>
+                   <div style="display: flex; gap: 10px;">Job Tab: <span class="tag">${
+                     item?.Job_type
+                   }</span></div>
+                   <div>Post date: ${item?.Post_date?.split("T")[0]}</div>
+                 </div>
+                 <div class="job-card-review">
+                   <span>${item?.Open_vacency} Open Position</span>
+                   <i class="fa-solid fa-chevron-right"></i>
+                 </div>
+               </div>`;
+              return;
+            });
+          }
+        } catch (err) {
+          // alert("An error occurred:", error);
+        }
+      };
+      getFirstData();
     </script>
     <script src="../script/nav.js"></script>
   </body>
