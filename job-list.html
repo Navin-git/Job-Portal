@@ -94,6 +94,7 @@
           const jobCard = document.getElementsByClassName("job-card");
           let isDetailOpen = false;
           let showDetail = true;
+          let U_user = JSON.parse(localStorage?.getItem("user"));
           const handleclose = () => {
             showDetail = false;
             document.getElementById("job-detail").innerHTML = "";
