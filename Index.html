@@ -290,11 +290,12 @@
           const data = await response.json();
           console.log(data);
           let show;
-          const handleclose = () => {
-            show = false;
-          };
+
           if (data) {
             show = true;
+            const handleclose = () => {
+              show = false;
+            };
             document.getElementById(
               "job-detail"
             ).innerHTML = ` <div style="width: ${
