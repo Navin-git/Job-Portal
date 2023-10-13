@@ -109,7 +109,137 @@
           //     showLess.style.display = "flex";
           //   });
           // }
+          const getDataById = async (id) => {
+        try {
+          const response = await fetch(
+            `http://localhost:9000/JobsDetails?J_id=${id}`,
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
 
+          const data = await response.json();
+          console.log(data);
+
+          if (data) {
+            document.getElementById(
+              "job-detail"
+            ).innerHTML = ` <div class="job-detail">
+                <button id="show-detail" onclick={handleclose()} class="show-detail">&#10005</button>
+                <div
+                  style="
+                    overflow-y: scroll;
+                    height: calc(100vh - 90px) !important;
+                    padding: 0px 20px 20px 20px;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                    class="profile-img-card"
+                  >
+                    <div style="display: flex; align-items: center; gap: 20px">
+                      <div>
+                        <img
+                          src=${
+                            data?.jobDetails?.Comapny_logo ??
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
+                          }
+                          alt=""
+                          style="width: 50px;
+                   border-radius: 5px;
+                   flex-shrink: 0 !important;
+                   height: 60px;
+                   object-fit: contain;"
+                        />
+                      </div>
+                      <div style="display: flex; flex-direction: column; gap: 3px">
+                        <h4>${data?.jobDetails?.Company_name ?? ""}</h4>
+                        <p>${data?.jobDetails?.Job_industry ?? ""}</p>
+                        <p>${data?.jobDetails?.Main_address ?? ""}</p>
+                      </div>
+                    </div>
+                    ${
+                      U_user?.U_id
+                        ? `<button class="btn" onclick="apply(${data?.jobDetails?.J_id})">Apply</button>`
+                        : ``
+                    }
+                  </div>
+                  <br />
+                  <div style="display: flex; gap: 20px">
+                    <div>
+                      <h5>Posted date</h5>
+                      <p>${data?.jobDetails?.Post_date?.split("T")[0] ?? ""}</p>
+                    </div>
+                    <div>
+                      <h5>Due date</h5>
+                      <p>${data?.jobDetails?.Due_date?.split("T")[0] ?? ""}</p>
+                    </div>
+                  </div>
+                  <br />
+                  <h3>${data?.jobDetails?.Job_title ?? ""}</h3>
+                  <br />
+                  <p>
+                   ${data?.jobDetails?.Job_desc ?? ""}
+                  </p>
+                  <br />
+                  <h4>Industry</h4>
+                  <div
+                    style="
+                      display: flex;
+                      gap: 10px;
+                      margin-top: 10px;
+                      flex-direction: column;
+                    "
+                  >
+                    <p>${data?.jobDetails?.Job_industry ?? ""}</p>
+                  </div>
+                  <br />
+                  <h4>Job Roles</h4>
+                  <div
+                    style="
+                      display: flex;
+                      gap: 10px;
+                      margin-top: 10px;
+                      font-size: large;
+                    "
+                  >
+                    ${data?.jobRoles?.map(
+                      (i) => `<div class="tag">${i?.roles}</div>`
+                    )}
+                  </div>
+                  <br />
+                  <h4>Requirements</h4>
+                  <div
+                    style="
+                      display: flex;
+                      gap: 10px;
+                      margin-top: 10px;
+                      flex-direction: column;
+                    "
+                  >
+                  ${data?.eduReq?.map((i) => `<p>${i?.Requirements}</p>`)}
+
+                  </div>
+                </div>
+              </div>`;
+          }
+        } catch (err) {
+          // alert("An error occurred:", error);
+        }
+      };
+      
           const handleOpen = (id) => {
         actId = id;
         getDataById(id);
