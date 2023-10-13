@@ -75,6 +75,31 @@
     </div>
     <script>
       const joblist = document.getElementById("joblist");
+      async function postData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "PUT",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+
+      const accept = (A_id, status) => {
+        postData(`http://localhost:9000/Application`, {
+          A_id: A_id,
+          Status: status,
+        }).then(() => {
+          window.location.reload();
+        });
+      };
+
       const getData = async () => {
         try {
           const response = await fetch(
@@ -103,8 +128,12 @@
               <td>${item?.Due_date?.split("T")[0] ?? ""}</td>
               <td>
                 <div style="display: flex; gap: 10px; width: fit-content">
-                  <button class="outline-btn">Accept</button>
-                  <button style="width: fit-content" class="btn">Reject</button>
+                  <button onclick="accept(${
+                    (item?.A_id, "accepted")
+                  })" class="outline-btn">Accept</button>
+                  <button onclick="accept(${
+                    (item?.A_id, "rejected")
+                  })" style="width: fit-content" class="btn">Reject</button>
                 </div>
               </td>
             </tr>`;
