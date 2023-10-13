@@ -49,7 +49,7 @@
       <div class="hero">
         <h1>FIND THE JOB THAT FITS YOUR LIFE</h1>
         <h4>We offer thousands of jobs vacancies right now</h4>
-        <form onsubmit="onsearch(event)" class="search-job">
+        <form onsubmit="HandleSearch(event)" class="search-job">
           <input
             type="text"
             name=""
@@ -551,7 +551,7 @@
       const ontitlechange = (e) => {
         searchvalue = e.target.value;
       };
-      const onsearch = (e) => {
+      const HandleSearch = (e) => {
         e.preventDefault();
         const getsearch = async (search) => {
           try {
