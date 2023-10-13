@@ -159,7 +159,7 @@
               <td>${item?.Apply_date?.split("T")[0] ?? ""}</td>
               <td>${item?.Due_date?.split("T")[0] ?? ""}</td>
               <td>
-                <div style="display: flex; gap: 10px; width: fit-content">
+                <div style="display: flex; gap: 10px; width: fit-content; align-items:center">
                  ${
                    item?.Status === "acceped" || item?.Status === "rejected"
                      ? `<span style="background: ${
