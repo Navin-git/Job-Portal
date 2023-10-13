@@ -162,14 +162,20 @@
                 <div style="display: flex; gap: 10px; width: fit-content">
                  ${
                    item?.Status === "acceped" || item?.Status === "rejected"
-                     ? item?.Status
+                     ? `<span style="background: ${
+                         item?.Status === "acceped"
+                           ? `green`
+                           : item?.Status === "rejected"
+                           ? "red"
+                           : "white"
+                       }; padding:"5px"> ${item?.Status} </span>`
                      : `<button onclick="accept(${item?.A_id})" class="outline-btn">Accept</button>
                   <button onclick="reject(${item?.A_id})" style="width: fit-content" class="btn">Reject</button>`
                  }
                 </div>
                 ${
                   item?.Status === "rejected"
-                    ? `<button onclick="deleteD(${item?.A_id})" style="width: fit-content" class="btn">Delete</button>`
+                    ? `<button onclick="deleteD(${item?.A_id})" style="width: fit-content; float:right" class="btn">Delete</button>`
                     : ``
                 }
                 </div>
