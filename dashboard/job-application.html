@@ -168,7 +168,9 @@
                            : item?.Status === "rejected"
                            ? "red"
                            : "white"
-                       }; padding: 5px; color:white"> ${item?.Status} </span>`
+                       }; padding: 5px; color:white; height:fit"> ${
+                         item?.Status
+                       } </span>`
                      : `<button onclick="accept(${item?.A_id})" class="outline-btn">Accept</button>
                   <button onclick="reject(${item?.A_id})" style="width: fit-content" class="btn">Reject</button>`
                  }${
