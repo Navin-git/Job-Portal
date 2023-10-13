@@ -295,9 +295,10 @@
             ).innerHTML = ` <div class="job-detail">
           <button id="show-less" class="show-detail"><</button>
           <div
-            style="width: 50px; border-radius: 5px;  flex-shrink: 0 !important;
-                    height: 60px;
-                    object-fit: contain;
+            style="
+              overflow-y: scroll;
+              height: calc(100vh - 90px) !important;
+              padding: 80px 20px 20px 20px;
             "
           >
             <div
@@ -316,7 +317,11 @@
                       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
                     }
                     alt=""
-                    style="width: 60px; height: auto"
+                    style="width: 50px;
+             border-radius: 5px;
+             flex-shrink: 0 !important;
+             height: 60px;
+             object-fit: contain;"
                   />
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 3px">
