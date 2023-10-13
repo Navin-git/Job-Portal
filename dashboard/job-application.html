@@ -154,7 +154,7 @@
           const data = await response.json();
           data.forEach((item) => {
             joblist.innerHTML += `<tr>
-              <td><a href="/dashboard/userprofile?U_id=${item?.U_id}">${
+              <td><a href="/dashboard/user0profile.html?U_id=${item?.U_id}">${
               item?.FullName
             }</a></td>
               <td>${item?.Job_title ?? ""}</td>
