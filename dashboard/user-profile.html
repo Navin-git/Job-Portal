@@ -374,7 +374,7 @@
         const data = await response.json();
         console.log(data);
         if (data) {
-          document.getElementById("resume").src = data?.Resume;
+          document.getElementById("resume").href = data?.Resume;
         }
       };
 
@@ -409,11 +409,10 @@
             Name.value = data?.userDetails?.FullName || "";
             Email.value = data?.userDetails?.Email || "";
             Phone.value = data?.userDetails?.Phone_number || "";
-            DOB.value = data?.userDetails?.DOB || "";
+            DOB.value = data?.userDetails?.DOB.split("T")[0] || "";
             Address.value = data?.userDetails?.Address || "";
             Prefered_Salary.value = data?.userDetails?.Prefered_salary || "";
-            Prefered_Job_Type.value =
-              data?.userDetails?.Prefered_Job_Type || "";
+            Prefered_Job_Type.value = data?.userDetails?.Prefered_jobtype || "";
             // Prefered_jobtitle.value = data?.userDetails?.Prefered_jobtitle || "";
             School.value = data?.userDetails?.School_name || "";
             School_Passout.value = data?.userDetails?.School_passoutyear || "";
