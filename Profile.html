@@ -343,19 +343,16 @@
           PreferedSalary: input.Prefered_Salary,
           Prefered_jobtype: input.Prefered_Job_Type,
           Prefered_jobtitle: input.Prefered_jobtitle,
-        },"PUT").then((data) => {
-          console.log(data); // JSON data parsed by `data.json()` call
-          // window.location.reload();
-          postData("http://localhost:9000/Skills", {
+        },"PUT").then(() => {
+        });
+
+        await  postData("http://localhost:9000/Skills", {
           U_id: JSON.parse(localStorage?.getItem("user"))?.U_id,
           skills: Skill_List,
         }).then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
           // window.location.reload();
         },"POST");
-        });
-
-          
       };
       let Skill_List = [];
       function handleRoleKeyUp(event) {
@@ -479,7 +476,7 @@
             U_email.innerHTML = data?.Email || "";
             U_address.innerHTML = data?.Address || "";
             Name.value = data?.Fullname || "";
-            input.Name = data?.FullName || "";;
+            input.Name = data?.Fullname || "";;
             input.Email = data?.Email || "";
             Email.value = data?.Email || "";
             Phone.value = data?.Phone_number || "";
