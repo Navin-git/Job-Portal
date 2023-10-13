@@ -60,8 +60,8 @@
             </div> -->
             <div style="display: flex; flex-direction: column; gap: 3px">
               <h4 id="U_name">Disacord</h4>
-              <p id="ee">IT Company</p>
-              <p>Pokhara</p>
+              <p id="U_email">IT Company</p>
+              <p id="U_address">Pokhara</p>
             </div>
           </div>
           <div>
@@ -219,7 +219,9 @@
       const Email_error = document.getElementById("Email-error");
       const Name_error = document.getElementById("Name-error");
       const Phone_error = document.getElementById("Phone-error");
-      const Address_error = document.getElementById("Address-error");
+      const U_name = document.getElementById("U_name");
+      const U_email = document.getElementById("U_email");
+      const U_address = document.getElementById("U_address");
       // const Type_error = document.getElementById("Type-error");
       let input = {};
       Name.addEventListener("change", (e) => {
@@ -376,6 +378,10 @@
           const data = await response.json();
           console.log(data);
           if (data) {
+            U_name.innerHTML = data?.userDetails?.FullName || "";
+            U_email.innerHTML = data?.userDetails?.Email || "";
+            U_address.innerHTML = data?.userDetails?.Address || "";
+
             Name.value = data?.userDetails?.FullName || "";
             Email.value = data?.userDetails?.Email || "";
             Phone.value = data?.userDetails?.Phone_number || "";
