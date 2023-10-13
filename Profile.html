@@ -268,9 +268,9 @@
         input.Passout = e.target.value;
       });
 
-      async function postData(url = "", data = {}) {
+      async function postData(url = "", data = {},method) {
         const response = await fetch(url, {
-          method: "POST",
+          method: method,
           mode: "cors",
           cache: "no-cache",
           credentials: "same-origin",
@@ -284,7 +284,7 @@
         return response.json();
       }
 
-      const handlesubmit = () => {
+      const handlesubmit = async () => {
         if (!input.Name) {
           Name_error.innerHTML = "Full Name is required";
           return;
@@ -332,7 +332,8 @@
         // } else {
         //   Type_error.innerHTML = "";
         // }
-        postData("http://localhost:9000/Profile", {
+      await  postData("http://localhost:9000/Profile", {
+          U_id: JSON.parse(localStorage?.getItem("user"))?.U_id,
           DOB: input.DOB,
           Address: input.Address,
           FullName: input.Name,
@@ -341,10 +342,18 @@
           PreferedSalary: input.PreferedSalary,
           Prefered_jobtype: input.Prefered_jobtype,
           Prefered_jobtitle: input.Prefered_jobtitle,
+        },"PUT").then((data) => {
+          console.log(data); // JSON data parsed by `data.json()` call
+          // window.location.reload();
+        });
+
+        await  postData("http://localhost:9000/Skills", {
+          U_id: JSON.parse(localStorage?.getItem("user"))?.U_id,
+          skills: Skill_List,
         }).then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
           window.location.reload();
-        });
+        },"POST");
       };
       let Skill_List = [];
       function handleRoleKeyUp(event) {
