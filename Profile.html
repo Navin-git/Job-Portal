@@ -465,7 +465,7 @@
 
         // Create a FormData object to send the file
         const formData = new FormData();
-        formData.append("resumeFile", file); // Use the appropriate field name for your server
+        formData.append("resume", file); // Use the appropriate field name for your server
         formData.append("U_id", JSON.parse(localStorage?.getItem("user"))?.U_id);
 
         // Fetch options for the POST request
