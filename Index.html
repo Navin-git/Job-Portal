@@ -314,7 +314,7 @@
                 <div>
                   <img
                     src=${
-                      data?.Comapny_logo ??
+                      data?.jobDetails?.Comapny_logo ??
                       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
                     }
                     alt=""
@@ -322,9 +322,9 @@
                   />
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 3px">
-                  <h4>${data?.Company_name}</h4>
-                  <p>${data?.Industry}</p>
-                  <p>${data?.Main_address}</p>
+                  <h4>${data?.jobDetails?.Company_name}</h4>
+                  <p>${data?.jobDetails?.Industry}</p>
+                  <p>${data?.jobDetails?.Main_address}</p>
                 </div>
               </div>
               <button class="btn">Apply</button>
@@ -333,18 +333,18 @@
             <div style="display: flex; gap: 20px">
               <div>
                 <h5>Posted date</h5>
-                <p>${data?.Post_date}</p>
+                <p>${data?.jobDetails?.Post_date}</p>
               </div>
               <div>
                 <h5>Due date</h5>
-                <p>${data?.Due_date}</p>
+                <p>${data?.jobDetails?.Due_date}</p>
               </div>
             </div>
             <br />
-            <h3>${data?.Job_title}</h3>
+            <h3>${data?.jobDetails?.Job_title}</h3>
             <br />
             <p>
-             ${data?.Job_desc}
+             ${data?.jobDetails?.Job_desc}
             </p>
             <br />
             <h4>Industry</h4>
@@ -356,7 +356,7 @@
                 flex-direction: column;
               "
             >
-              <p>${data?.Industry}</p>
+              <p>${data?.jobDetails?.Industry}</p>
             </div>
             <br />
             <h4>Skills</h4>
@@ -368,7 +368,9 @@
                 font-size: large;
               "
             >
-              ${data?.Skill?.map((i) => `<div class="tag">${i?.name}</div>`)}
+              ${data?.jobDetails?.jobRoles?.map(
+                (i) => `<div class="tag">${i?.roles}</div>`
+              )}
             </div>
             <br />
             <h4>Requirements</h4>
@@ -380,7 +382,7 @@
                 flex-direction: column;
               "
             >
-            ${data?.Requirements?.map((i) => `<p>${i?.name}</p>`)}
+            ${data?.eduReq?.map((i) => `<p>${i?.Requirements}</p>`)}
               <p>1-2 years of sales experience.</p>
               <p>
                 A background in management, with a minimum of 2 years in a
