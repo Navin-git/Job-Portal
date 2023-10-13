@@ -91,10 +91,19 @@
         return response.json();
       }
 
-      const accept = (A_id, status) => {
+      const accept = (A_id) => {
         postData(`http://localhost:9000/UpdateApplication`, {
           A_id: A_id,
-          Status: status,
+          Status: "acceped",
+        }).then(() => {
+          window.location.reload();
+        });
+      };
+
+      const reject = (A_id) => {
+        postData(`http://localhost:9000/UpdateApplication`, {
+          A_id: A_id,
+          Status: "rejected",
         }).then(() => {
           window.location.reload();
         });
@@ -130,10 +139,10 @@
                 <div style="display: flex; gap: 10px; width: fit-content">
                   <button onclick="accept(${
                     item?.A_id
-                  }, ${"accepted"})" class="outline-btn">Accept</button>
-                  <button onclick="accept(${
+                  })" class="outline-btn">Accept</button>
+                  <button onclick="reject(${
                     item?.A_id
-                  }, ${"rejected"})" style="width: fit-content" class="btn">Reject</button>
+                  }})" style="width: fit-content" class="btn">Reject</button>
                 </div>
               </td>
             </tr>`;
