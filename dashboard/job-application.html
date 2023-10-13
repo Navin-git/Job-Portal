@@ -129,11 +129,11 @@
               <td>
                 <div style="display: flex; gap: 10px; width: fit-content">
                   <button onclick="accept(${
-                    (item?.A_id, "accepted")
-                  })" class="outline-btn">Accept</button>
+                    item?.A_id
+                  }, "accepted")" class="outline-btn">Accept</button>
                   <button onclick="accept(${
-                    (item?.A_id, "rejected")
-                  })" style="width: fit-content" class="btn">Reject</button>
+                    item?.A_id
+                  }, "rejected")" style="width: fit-content" class="btn">Reject</button>
                 </div>
               </td>
             </tr>`;
