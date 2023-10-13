@@ -56,8 +56,8 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
+          <tbody id="joblist">
+            <!-- <tr>
               <td>Alfreds Futterkiste</td>
               <td>Maria Anders</td>
               <td>Germany</td>
@@ -68,71 +68,80 @@
                   <button style="width: fit-content" class="btn">Reject</button>
                 </div>
               </td>
-            </tr>
-            <tr>
-              <td>Centro comercial Moctezuma</td>
-              <td>Francisco Chang</td>
-              <td>Mexico</td>
-              <td>Germany</td>
-              <td>
-                <div style="display: flex; gap: 10px; width: fit-content">
-                  <button class="outline-btn">Accept</button>
-                  <button style="width: fit-content" class="btn">Reject</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Ernst Handel</td>
-              <td>Roland Mendel</td>
-              <td>Austria</td>
-              <td>Germany</td>
-              <td>
-                <div style="display: flex; gap: 10px; width: fit-content">
-                  <button class="outline-btn">Accept</button>
-                  <button style="width: fit-content" class="btn">Reject</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Island Trading</td>
-              <td>Helen Bennett</td>
-              <td>UK</td>
-              <td>Germany</td>
-              <td>
-                <div style="display: flex; gap: 10px; width: fit-content">
-                  <button class="outline-btn">Accept</button>
-                  <button style="width: fit-content" class="btn">Reject</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Laughing Bacchus Winecellars</td>
-              <td>Yoshi Tannamuri</td>
-              <td>Canada</td>
-              <td>Germany</td>
-              <td>
-                <div style="display: flex; gap: 10px; width: fit-content">
-                  <button class="outline-btn">Accept</button>
-                  <button style="width: fit-content" class="btn">Reject</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Magazzini Alimentari Riuniti</td>
-              <td>Giovanni Rovelli</td>
-              <td>Italy</td>
-              <td>Germany</td>
-              <td>
-                <div style="display: flex; gap: 10px; width: fit-content">
-                  <button class="outline-btn">Accept</button>
-                  <button style="width: fit-content" class="btn">Reject</button>
-                </div>
-              </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </section>
     </div>
+    <script>
+      const joblist = document.getElementById("joblist");
+      const getData = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:9000/Application?C_id=${
+              JSON.parse(localStorage.getItem("user")).C_id
+            }`,
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
+
+          const data = await response.json();
+          data.forEach((item) => {
+            joblist.innerHTML += `<tr>
+              <td>Alfreds Futterkiste</td>
+              <td>Maria Anders</td>
+              <td>Germany</td>
+              <td>Maria Anders</td>
+              <td>
+                <div style="display: flex; gap: 10px; width: fit-content">
+                  <button class="outline-btn">Accept</button>
+                  <button style="width: fit-content" class="btn">Reject</button>
+                </div>
+              </td>
+            </tr>`;
+          });
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      };
+
+      getData();
+      async function DeleteData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "DELETE",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+
+      const handleDelete = (id) => {
+        DeleteData("http://localhost:9000/Jobs", {
+          J_id: id,
+        }).then(() => {
+          window.location.reload();
+        });
+      };
+      const delJob = (J_id) => {
+        window.location.href = `/dashboard/job-post.html?J_id=${J_id}`;
+      };
+    </script>
     <script src="../script/dashnav.js"></script>
   </body>
 </html>
