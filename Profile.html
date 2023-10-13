@@ -269,6 +269,8 @@
         input.Passout = e.target.value;
       });
 
+      let isskill = false
+
       async function postData(url = "", data = {},method) {
         const response = await fetch(url, {
           method: method,
@@ -346,13 +348,19 @@
         },"PUT").then(() => {
         });
 
-        await  postData("http://localhost:9000/Skills", {
+        await isskill? postData("http://localhost:9000/UpdateSkills", {
           U_id: JSON.parse(localStorage?.getItem("user"))?.U_id,
           skills: Skill_List,
         },"POST").then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
           // window.location.reload();
-        });
+        }):postData("http://localhost:9000/Skills", {
+          U_id: JSON.parse(localStorage?.getItem("user"))?.U_id,
+          skills: Skill_List,
+        },"POST").then((data) => {
+          console.log(data); // JSON data parsed by `data.json()` call
+          // window.location.reload();
+        })
       };
       let Skill_List = [];
       function handleRoleKeyUp(event) {
@@ -442,6 +450,7 @@
             Skill_List = data
               ?.filter((i) => i.SK_id)
               .map((item) => {
+                isskill=true
                 SkillS.innerHTML += `<li>${item.Skills}</li>`;
                 return item.Skills;
               });
