@@ -47,7 +47,7 @@
           <ul class="nav-log"></ul>
         </div>
       </nav>
-      <form id="profile-form" class="profile-sec">
+      <div id="profile-form" class="profile-sec">
         <h3>User profile</h3>
         <div class="profile-img-card">
           <div style="display: flex; align-items: center; gap: 20px">
@@ -174,10 +174,29 @@
             ></p>
           </div>
 
-          <div></div>
-          <button style="margin-left: auto" class="btn">Submit</button>
+          <div class="input-div">
+            <label for="Skill">Skills</label>
+            <ul
+              style="margin: 0 30px; display: flex; gap: 20px; flex-wrap: wrap"
+              id="skill-list"
+            ></ul>
+            <input
+              type="text"
+              name=""
+              onkeyup="handleRoleKeyUp(event)"
+              id="Skill"
+              readonly
+            />
+          </div>
+          <button
+            style="margin-left: auto"
+            class="btn"
+            onclick="handlesubmit()"
+          >
+            Submit
+          </button>
         </div>
-      </form>
+      </div>
     </div>
 
     <script>
@@ -193,7 +212,8 @@
       const School_Passout = document.getElementById("School-Passout");
       const PlussTwo = document.getElementById("12School");
       const Passout = document.getElementById("Passout");
-
+      const Skill = document.getElementById("Skill");
+      const SkillS = document.getElementById("skill-list");
       // const Type = document.getElementById("Type");
       const Signup = document.getElementById("profile-form");
       const Email_error = document.getElementById("Email-error");
@@ -219,6 +239,9 @@
       // });
       DOB.addEventListener("change", (e) => {
         input.DOB = e.target.value;
+      });
+      Skill.addEventListener("change", (e) => {
+        input.Skill = e.target.value;
       });
       Prefered_Salary.addEventListener("change", (e) => {
         input.Prefered_Salary = e.target.value;
@@ -255,8 +278,7 @@
         return response.json();
       }
 
-      Signup.addEventListener("submit", (e) => {
-        e.preventDefault();
+      const handlesubmit = () => {
         if (!input.Name) {
           Name_error.innerHTML = "Full Name is required";
           return;
@@ -317,7 +339,20 @@
           console.log(data); // JSON data parsed by `data.json()` call
           window.location.reload();
         });
-      });
+      };
+      let Skill_List = [];
+      function handleRoleKeyUp(event) {
+        event = event || window.event;
+        if (event.keyCode === 13) {
+          if (input.Skill) {
+            Skill_List?.push(input.Skill);
+            SkillS.innerHTML += `<li>${input.Skill}</li>`;
+            input.Skill = "";
+            Skill.value = "";
+          }
+          // Add any desired actions to be taken when Enter is pressed
+        }
+      }
       const getData = async () => {
         let users = JSON.parse(localStorage?.getItem("user"));
         try {
@@ -353,6 +388,12 @@
             School_Passout.value = data?.userDetails?.School_passoutyear || "";
             PlussTwo.value = data?.userDetails?.College_name || "";
             Passout.value = data?.userDetails?.College_passoutyear || "";
+            Skill_List = data?.userSkills
+              ?.filter((i) => i.SK_id)
+              .map((item) => {
+                SkillS.innerHTML += `<li>${item.Skills}</li>`;
+                return item.Skills;
+              });
           }
         } catch (err) {
           // alert("An error occurred:", error);
