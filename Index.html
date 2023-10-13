@@ -332,11 +332,11 @@
             <div style="display: flex; gap: 20px">
               <div>
                 <h5>Posted date</h5>
-                <p>${data?.jobDetails?.Post_date}</p>
+                <p>${data?.jobDetails?.Post_date?.split("T")[0]}</p>
               </div>
               <div>
                 <h5>Due date</h5>
-                <p>${data?.jobDetails?.Due_date}</p>
+                <p>${data?.jobDetails?.Due_date?.split("T")[0]}</p>
               </div>
             </div>
             <br />
@@ -355,10 +355,10 @@
                 flex-direction: column;
               "
             >
-              <p>${data?.jobDetails?.Industry}</p>
+              <p>${data?.jobDetails?.Job_Industry}</p>
             </div>
             <br />
-            <h4>Skills</h4>
+            <h4>Job Roles</h4>
             <div
               style="
                 display: flex;
@@ -367,7 +367,7 @@
                 font-size: large;
               "
             >
-              ${data?.jobDetails?.jobRoles?.map(
+              ${data?.jobRoles?.map(
                 (i) => `<div class="tag">${i?.roles}</div>`
               )}
             </div>
@@ -382,13 +382,7 @@
               "
             >
             ${data?.eduReq?.map((i) => `<p>${i?.Requirements}</p>`)}
-              <p>1-2 years of sales experience.</p>
-              <p>
-                A background in management, with a minimum of 2 years in a
-                management role.
-              </p>
-              <p>Proven success as a developer.</p>
-              <p>Experience directing projects and delegating tasks.</p>
+              
             </div>
           </div>
         </div>`;
