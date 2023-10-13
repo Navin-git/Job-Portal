@@ -378,18 +378,21 @@
 
       const getFirstData = async () => {
         try {
-          const response = await fetch(`http://localhost:9000/`, {
-            method: "GET",
-            // body: e,
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
-          });
+          const response = await fetch(
+            `http://localhost:9000/ApplicationStatus`,
+            {
+              method: "GET",
+              // body: e,
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
 
           const data = await response.json();
           console.log(data);
