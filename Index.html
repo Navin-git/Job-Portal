@@ -275,6 +275,37 @@
         showDetail = false;
         document.getElementById("job-detail").innerHTML = "";
       };
+      async function postData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+      const apply = (J_id) => {
+        postData(`http://localhost:9000/Jobs`, {
+          J_id: J_id,
+          U_id: user?.U_id,
+          Apply_date:
+            new Date().getFullYear() +
+            "-" +
+            (new Date().getMonth() + 1).toString().padStart(2, "0") +
+            "-" +
+            String(new Date().getDate()).padStart(2, "0"),
+          status: "in-process",
+        }).then((data) => {
+          console.log(data); // JSON data parsed by `data.json()` call
+          window.location.pathname = "/dashboard/job-list.html";
+        });
+      };
       const getDataById = async (id) => {
         try {
           const response = await fetch(
@@ -299,103 +330,105 @@
             document.getElementById(
               "job-detail"
             ).innerHTML = ` <div class="job-detail">
-          <button id="show-detail" onclick={handleclose()} class="show-detail">&#10005</button>
-          <div
-            style="
-              overflow-y: scroll;
-              height: calc(100vh - 90px) !important;
-              padding: 0px 20px 20px 20px;
-            "
-          >
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-              "
-              class="profile-img-card"
-            >
-              <div style="display: flex; align-items: center; gap: 20px">
-                <div>
-                  <img
-                    src=${
-                      data?.jobDetails?.Comapny_logo ??
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
-                    }
-                    alt=""
-                    style="width: 50px;
-             border-radius: 5px;
-             flex-shrink: 0 !important;
-             height: 60px;
-             object-fit: contain;"
-                  />
+                <button id="show-detail" onclick={handleclose()} class="show-detail">&#10005</button>
+                <div
+                  style="
+                    overflow-y: scroll;
+                    height: calc(100vh - 90px) !important;
+                    padding: 0px 20px 20px 20px;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                    class="profile-img-card"
+                  >
+                    <div style="display: flex; align-items: center; gap: 20px">
+                      <div>
+                        <img
+                          src=${
+                            data?.jobDetails?.Comapny_logo ??
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
+                          }
+                          alt=""
+                          style="width: 50px;
+                   border-radius: 5px;
+                   flex-shrink: 0 !important;
+                   height: 60px;
+                   object-fit: contain;"
+                        />
+                      </div>
+                      <div style="display: flex; flex-direction: column; gap: 3px">
+                        <h4>${data?.jobDetails?.Company_name ?? ""}</h4>
+                        <p>${data?.jobDetails?.Job_industry ?? ""}</p>
+                        <p>${data?.jobDetails?.Main_address ?? ""}</p>
+                      </div>
+                    </div>
+                    <button class="btn" onclick="apply(${
+                      data?.jobDetails?.J_id
+                    })">Apply</button>
+                  </div>
+                  <br />
+                  <div style="display: flex; gap: 20px">
+                    <div>
+                      <h5>Posted date</h5>
+                      <p>${data?.jobDetails?.Post_date?.split("T")[0] ?? ""}</p>
+                    </div>
+                    <div>
+                      <h5>Due date</h5>
+                      <p>${data?.jobDetails?.Due_date?.split("T")[0] ?? ""}</p>
+                    </div>
+                  </div>
+                  <br />
+                  <h3>${data?.jobDetails?.Job_title ?? ""}</h3>
+                  <br />
+                  <p>
+                   ${data?.jobDetails?.Job_desc ?? ""}
+                  </p>
+                  <br />
+                  <h4>Industry</h4>
+                  <div
+                    style="
+                      display: flex;
+                      gap: 10px;
+                      margin-top: 10px;
+                      flex-direction: column;
+                    "
+                  >
+                    <p>${data?.jobDetails?.Job_industry ?? ""}</p>
+                  </div>
+                  <br />
+                  <h4>Job Roles</h4>
+                  <div
+                    style="
+                      display: flex;
+                      gap: 10px;
+                      margin-top: 10px;
+                      font-size: large;
+                    "
+                  >
+                    ${data?.jobRoles?.map(
+                      (i) => `<div class="tag">${i?.roles}</div>`
+                    )}
+                  </div>
+                  <br />
+                  <h4>Requirements</h4>
+                  <div
+                    style="
+                      display: flex;
+                      gap: 10px;
+                      margin-top: 10px;
+                      flex-direction: column;
+                    "
+                  >
+                  ${data?.eduReq?.map((i) => `<p>${i?.Requirements}</p>`)}
+
+                  </div>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 3px">
-                  <h4>${data?.jobDetails?.Company_name ?? ""}</h4>
-                  <p>${data?.jobDetails?.Job_industry ?? ""}</p>
-                  <p>${data?.jobDetails?.Main_address ?? ""}</p>
-                </div>
-              </div>
-              <button class="btn">Apply</button>
-            </div>
-            <br />
-            <div style="display: flex; gap: 20px">
-              <div>
-                <h5>Posted date</h5>
-                <p>${data?.jobDetails?.Post_date?.split("T")[0] ?? ""}</p>
-              </div>
-              <div>
-                <h5>Due date</h5>
-                <p>${data?.jobDetails?.Due_date?.split("T")[0] ?? ""}</p>
-              </div>
-            </div>
-            <br />
-            <h3>${data?.jobDetails?.Job_title ?? ""}</h3>
-            <br />
-            <p>
-             ${data?.jobDetails?.Job_desc ?? ""}
-            </p>
-            <br />
-            <h4>Industry</h4>
-            <div
-              style="
-                display: flex;
-                gap: 10px;
-                margin-top: 10px;
-                flex-direction: column;
-              "
-            >
-              <p>${data?.jobDetails?.Job_industry ?? ""}</p>
-            </div>
-            <br />
-            <h4>Job Roles</h4>
-            <div
-              style="
-                display: flex;
-                gap: 10px;
-                margin-top: 10px;
-                font-size: large;
-              "
-            >
-              ${data?.jobRoles?.map(
-                (i) => `<div class="tag">${i?.roles}</div>`
-              )}
-            </div>
-            <br />
-            <h4>Requirements</h4>
-            <div
-              style="
-                display: flex;
-                gap: 10px;
-                margin-top: 10px;
-                flex-direction: column;
-              "
-            >
-            ${data?.eduReq?.map((i) => `<p>${i?.Requirements}</p>`)}
-              
-            </div>
-          </div>
-        </div>`;
+              </div>`;
           }
         } catch (err) {
           // alert("An error occurred:", error);
@@ -443,61 +476,61 @@
               jobList.innerHTML += `  <div class="job-card"  onclick={handleOpen(${
                 item?.J_id
               })}>
-          <div
-            style="
-              display: flex;
-              gap: 10px;
-              align-items: center;
-              padding: 0 20px;
-            "
-          >
-            <img
-              src=${
-                item?.Comapny_logo ??
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
-              }
-              alt=""
-              style="width: 50px; border-radius: 5px;  flex-shrink: 0 !important;
-                    height: 60px;
-                    object-fit: contain;"
-            />
-            <div
-              style="
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                padding: 0 20px;
-              "
-            >
-              <h4>${item?.Company_name}</h4>
-              <p>${item?.Industry}</p>
-            </div>
-          </div>
-          <h1  style="padding: 0 20px">${item?.Job_title}</h1>
-          <p style="padding: 0 20px">
-            ${item?.Job_desc}
-          </p>
-          <div
-            style="
-              display: flex;
-              flex-direction: column;
-              gap: 10px;
-              padding: 0 20px;
-            "
-          >
-          <div style="display: flex; gap: 10px;">Location: <span class="tag">${
-            item?.Main_address
-          }</span></div>
-            <div style="display: flex; gap: 10px;">Job Tab: <span class="tag">${
-              item?.Job_type
-            }</span></div>
-            <div>Post date: ${item?.Post_date?.split("T")[0]}</div>
-          </div>
-          <div class="job-card-review">
-            <span>${item?.Open_vacency} Open Position</span>
-            <i class="fa-solid fa-chevron-right"></i>
-          </div>
-        </div>`;
+                <div
+                  style="
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    padding: 0 20px;
+                  "
+                >
+                  <img
+                    src=${
+                      item?.Comapny_logo ??
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUsQiplH_OWtHnMb1Nrk31z58OJN009JG-w&usqp=CAU"
+                    }
+                    alt=""
+                    style="width: 50px; border-radius: 5px;  flex-shrink: 0 !important;
+                          height: 60px;
+                          object-fit: contain;"
+                  />
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      gap: 10px;
+                      padding: 0 20px;
+                    "
+                  >
+                    <h4>${item?.Company_name}</h4>
+                    <p>${item?.Industry}</p>
+                  </div>
+                </div>
+                <h1  style="padding: 0 20px">${item?.Job_title}</h1>
+                <p style="padding: 0 20px">
+                  ${item?.Job_desc}
+                </p>
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    padding: 0 20px;
+                  "
+                >
+                <div style="display: flex; gap: 10px;">Location: <span class="tag">${
+                  item?.Main_address
+                }</span></div>
+                  <div style="display: flex; gap: 10px;">Job Tab: <span class="tag">${
+                    item?.Job_type
+                  }</span></div>
+                  <div>Post date: ${item?.Post_date?.split("T")[0]}</div>
+                </div>
+                <div class="job-card-review">
+                  <span>${item?.Open_vacency} Open Position</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </div>
+              </div>`;
               return;
             });
           }
