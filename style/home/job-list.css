@@ -33,7 +33,8 @@
 
 .job-detail{
      height: 100vh;
-     /* width: 0px; */
+     width: 100%;
+     max-width: 500px;
      position: fixed;
      right: 0;
      top: 0;
