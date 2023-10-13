@@ -255,6 +255,7 @@
     </footer>
     <script>
       let actId;
+      let U_user = JSON.parse(localStorage?.getItem("user"));
       const jobCard = document.getElementsByClassName("job-card");
       let isDetailOpen = false;
       // showLess.addEventListener("click", () => {
@@ -293,7 +294,7 @@
       const apply = (J_id) => {
         postData(`http://localhost:9000/Jobs`, {
           J_id: J_id,
-          U_id: user?.U_id,
+          U_id: U_user?.U_id,
           Apply_date:
             new Date().getFullYear() +
             "-" +
@@ -366,9 +367,10 @@
                         <p>${data?.jobDetails?.Main_address ?? ""}</p>
                       </div>
                     </div>
-                    <button class="btn" onclick="apply(${
-                      data?.jobDetails?.J_id
-                    })">Apply</button>
+                    ${
+                      U_user &&
+                      `<button class="btn" onclick="apply(${data?.jobDetails?.J_id})">Apply</button>`
+                    }
                   </div>
                   <br />
                   <div style="display: flex; gap: 20px">
