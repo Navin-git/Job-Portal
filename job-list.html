@@ -112,6 +112,22 @@
           //     showLess.style.display = "flex";
           //   });
           // }
+          const apply = (J_id) => {
+        postData(`http://localhost:9000/Application`, {
+          J_id: J_id,
+          U_id: U_user?.U_id,
+          Apply_date:
+            new Date().getFullYear() +
+            "-" +
+            (new Date().getMonth() + 1).toString().padStart(2, "0") +
+            "-" +
+            String(new Date().getDate()).padStart(2, "0"),
+          Status: "in-process",
+        }).then(() => {
+          window.location.reload();
+        });
+      };
+      
           const getDataById = async (id) => {
             try {
               const response = await fetch(
