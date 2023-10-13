@@ -481,12 +481,12 @@
             Email.value = data?.Email || "";
             Phone.value = data?.Phone_number || "";
             input.Phone = data?.Phone_number || "";
-            DOB.value = data?.DOB || "";
-            input.DOB = data?.DOB || "";
+            DOB.value = data?.DOB?.split("T")[0] || "";
+            input.DOB = data?.DOB?.split("T")[0] || "";
             Address.value = data?.Address || "";
             input.Address = data?.Address || "";
-            Prefered_Salary.value = data?.Prefered_salary || "";
-            input.Prefered_Salary = data?.Prefered_Salary || "";
+            Prefered_Salary.value = data?.PreferedSalary || "";
+            input.Prefered_Salary = data?.PreferedSalary || "";
             Prefered_Job_Type.value =
               data?.Prefered_jobtype || "";
               input.Prefered_Job_Type = data?.Prefered_jobtype || "";
