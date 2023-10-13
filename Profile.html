@@ -485,7 +485,7 @@
             // Handle the server response
             window.location.reload();
           })
-          .catch((error) => alert("Error:", error));
+          .catch(() => {});
       };
       
       const GetSkills = async () => {

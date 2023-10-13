@@ -65,7 +65,7 @@
             </div>
           </div>
           <div>
-            <!-- <button class="outline-btn">Edit</button> -->
+            <a id="resume" class="outline-btn">resume</a>
           </div>
         </div>
         <div class="profile-form">
@@ -355,6 +355,29 @@
           // Add any desired actions to be taken when Enter is pressed
         }
       }
+      const getResume = async () => {
+        const response = await fetch(
+          `http://localhost:9000/GetResume?U_id=${params.get("U_id")}`,
+          {
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+          }
+        );
+
+        const data = await response.json();
+        console.log(data);
+        if (data) {
+          document.getElementById("resume").src = data;
+        }
+      };
+
       const getData = async () => {
         let users = JSON.parse(localStorage?.getItem("user"));
         try {
@@ -381,7 +404,6 @@
             U_name.innerHTML = data?.userDetails?.FullName || "";
             U_email.innerHTML = data?.userDetails?.Email || "";
             U_address.innerHTML = data?.userDetails?.Address || "";
-
             Name.value = data?.userDetails?.FullName || "";
             Email.value = data?.userDetails?.Email || "";
             Phone.value = data?.userDetails?.Phone_number || "";
