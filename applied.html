@@ -376,6 +376,30 @@
         });
       };
 
+      async function DeleteData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "DELETE",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+
+      const handlecancel = (id) => {
+        DeleteData("http://localhost:9000/Application", {
+          A_id: id,
+        }).then(() => {
+          window.location.reload();
+        });
+      };
+
       const getFirstData = async () => {
         try {
           const response = await fetch(
@@ -455,7 +479,9 @@
                    <div>Post date: ${item?.Post_date?.split("T")[0]}</div>
                  </div>
                  <div class="job-card-review">
-                   <span>${item?.Open_vacency} Open Position</span>
+                   <button onclick="handlecancel(${
+                     item?.A_id
+                   })" style="text-decoration: underline;">Cancel Application</button>
                    <i class="fa-solid fa-chevron-right"></i>
                  </div>
                </div>`;
