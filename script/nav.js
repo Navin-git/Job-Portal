@@ -17,7 +17,7 @@ const handleLogout = () => {
 
 let user = JSON.parse(localStorage?.getItem("user"));
 
-if (user?.C_id) {
+if (user?.U_id) {
   for (let i = 0; i < log.length; i++) {
     console.log(log[i], i);
     log[
