@@ -270,9 +270,9 @@
       //     showLess.style.display = "flex";
       //   });
       // }
-      let show = true;
+      let showDetail = true;
       const handleclose = () => {
-        show = false;
+        showDetail = false;
       };
       const getDataById = async (id) => {
         try {
@@ -298,7 +298,7 @@
             document.getElementById(
               "job-detail"
             ).innerHTML = ` <div style="width: ${
-              show ? "100%" : "0"
+              showDetail ? "100%" : "0"
             }" class="job-detail">
           <button onclick={handleclose()} class="show-detail">&#10005</button>
           <div
