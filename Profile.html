@@ -146,7 +146,7 @@
         </div>
         <div class="input-div">
           <label for="School-Passout">School Passout</label>
-          <input type="date" name="" id="School-Passout" />
+          <input type="number" name="" id="School-Passout" />
           <p
             style="font-size: small; margin-left: 10px; color: red"
             id="School-Passout-error"
@@ -162,7 +162,7 @@
         </div>
         <div class="input-div">
           <label for="Passout">+2 Passout</label>
-          <input type="text" name="" id="Passout" />
+          <input type="number" name="" id="Passout" />
           <p
             style="font-size: small; margin-left: 10px; color: red"
             id="Passout-error"
@@ -426,8 +426,8 @@
             input.School_Passout = data.School_passoutyear || "";
             PlussTwo.value = data.College_name || "";
             input.PlussTwo = data.College_name || "";
-            Passout.value = data.College_passoutyear?.split("T")[0] || "";
-            input.Passout = data.College_passoutyear?.split("T")[0] || "";
+            Passout.value = data.College_passoutyear || "";
+            input.Passout = data.College_passoutyear || "";
             // Skill_List = data?.userSkills
             //   ?.filter((i) => i.SK_id)
             //   .map((item) => {
