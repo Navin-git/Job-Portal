@@ -48,14 +48,12 @@
      display: flex;
      justify-content: center;
      align-items: center;
-     height: 50px;
      border-radius: 10px 0 0 10px;
-     background: #fff;
-     border: none;
-     top: 120px;
+     margin: 10px 0;
+     text-decoration: underline;
      cursor: pointer;
-     border: 1px solid #e0e0e0;
-     border-right: none;
+     color: black;
+     border: none;
 }
 
 
