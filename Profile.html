@@ -381,22 +381,22 @@
           const data = await response.json();
           console.log(data);
           if (data) {
-            U_name.innerHTML = data?.userDetails?.FullName || "";
-            U_email.innerHTML = data?.userDetails?.Email || "";
-            U_address.innerHTML = data?.userDetails?.Address || "";
-            Name.value = data?.userDetails?.FullName || "";
-            Email.value = data?.userDetails?.Email || "";
-            Phone.value = data?.userDetails?.Phone_number || "";
-            DOB.value = data?.userDetails?.DOB || "";
-            Address.value = data?.userDetails?.Address || "";
-            Prefered_Salary.value = data?.userDetails?.Prefered_salary || "";
+            U_name.innerHTML = data.FullName || "";
+            U_email.innerHTML = data.Email || "";
+            U_address.innerHTML = data.Address || "";
+            Name.value = data.FullName || "";
+            Email.value = data.Email || "";
+            Phone.value = data.Phone_number || "";
+            DOB.value = data.DOB || "";
+            Address.value = data.Address || "";
+            Prefered_Salary.value = data.Prefered_salary || "";
             Prefered_Job_Type.value =
-              data?.userDetails?.Prefered_Job_Type || "";
-            // Prefered_jobtitle.value = data?.userDetails?.Prefered_jobtitle || "";
-            School.value = data?.userDetails?.School_name || "";
-            School_Passout.value = data?.userDetails?.School_passoutyear || "";
-            PlussTwo.value = data?.userDetails?.College_name || "";
-            Passout.value = data?.userDetails?.College_passoutyear || "";
+              data.Prefered_Job_Type || "";
+            // Prefered_jobtitle.value = data.Prefered_jobtitle || "";
+            School.value = data.School_name || "";
+            School_Passout.value = data.School_passoutyear || "";
+            PlussTwo.value = data.College_name || "";
+            Passout.value = data.College_passoutyear || "";
             Skill_List = data?.userSkills
               ?.filter((i) => i.SK_id)
               .map((item) => {
