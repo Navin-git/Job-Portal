@@ -97,10 +97,10 @@
           const data = await response.json();
           data.forEach((item) => {
             joblist.innerHTML += `<tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Maria Anders</td>
+              <td>${item?.FullName}</td>
+              <td>${item?.Job_title ?? ""}</td>
+              <td>${item?.Apply_date?.split("T")[0] ?? ""}</td>
+              <td>${item?.Due_date?.split("T")[0] ?? ""}</td>
               <td>
                 <div style="display: flex; gap: 10px; width: fit-content">
                   <button class="outline-btn">Accept</button>
