@@ -368,8 +368,9 @@
                       </div>
                     </div>
                     ${
-                      U_user &&
-                      `<button class="btn" onclick="apply(${data?.jobDetails?.J_id})">Apply</button>`
+                      U_user
+                        ? `<button class="btn" onclick="apply(${data?.jobDetails?.J_id})">Apply</button>`
+                        : ``
                     }
                   </div>
                   <br />
