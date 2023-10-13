@@ -103,7 +103,7 @@
           </div> -->
           <div class="input-div">
             <label for="DOB">DOB</label>
-            <input type="text" name="" readonly id="DOB" />
+            <input type="date" name="" readonly id="DOB" />
             <p
               style="font-size: small; margin-left: 10px; color: red"
               id="DOB-error"
@@ -377,6 +377,8 @@
           document.getElementById("resume").src = data;
         }
       };
+
+      getResume();
 
       const getData = async () => {
         let users = JSON.parse(localStorage?.getItem("user"));
