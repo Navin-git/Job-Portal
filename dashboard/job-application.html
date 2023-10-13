@@ -108,6 +108,29 @@
           window.location.reload();
         });
       };
+      async function DeleteData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "DELETE",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+
+      const deleteD = (id) => {
+        DeleteData("http://localhost:9000/Application", {
+          A_id: id,
+        }).then(() => {
+          window.location.reload();
+        });
+      };
 
       const getData = async () => {
         try {
@@ -137,12 +160,17 @@
               <td>${item?.Due_date?.split("T")[0] ?? ""}</td>
               <td>
                 <div style="display: flex; gap: 10px; width: fit-content">
-                  <button onclick="accept(${
-                    item?.A_id
-                  })" class="outline-btn">Accept</button>
-                  <button onclick="reject(${
-                    item?.A_id
-                  })" style="width: fit-content" class="btn">Reject</button>
+                 ${
+                   item?.Status === "acceped" || item?.Status === "rejected"
+                     ? item?.Status
+                     : `<button onclick="accept(${item?.A_id})" class="outline-btn">Accept</button>
+                  <button onclick="reject(${item?.A_id})" style="width: fit-content" class="btn">Reject</button>`
+                 }
+                </div>
+                ${
+                  item?.Status === "rejected" &&
+                  `<button onclick="deleteD(${item?.A_id})" style="width: fit-content" class="btn">Delete</button>`
+                }
                 </div>
               </td>
             </tr>`;
@@ -153,21 +181,6 @@
       };
 
       getData();
-      async function DeleteData(url = "", data = {}) {
-        const response = await fetch(url, {
-          method: "DELETE",
-          mode: "cors",
-          cache: "no-cache",
-          credentials: "same-origin",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          redirect: "follow",
-          referrerPolicy: "no-referrer",
-          body: JSON.stringify(data),
-        });
-        return response.json();
-      }
 
       const handleDelete = (id) => {
         DeleteData("http://localhost:9000/Jobs", {
