@@ -464,10 +464,10 @@
           const data = await response.json();
           console.log(data);
           if (data) {
-            U_name.innerHTML = data?.FullName || "";
+            U_name.innerHTML = data?.Fullname || "";
             U_email.innerHTML = data?.Email || "";
             U_address.innerHTML = data?.Address || "";
-            Name.value = data?.FullName || "";
+            Name.value = data?.Fullname || "";
             Email.value = data?.Email || "";
             Phone.value = data?.Phone_number || "";
             DOB.value = data?.DOB || "";
