@@ -45,9 +45,6 @@
 }
 
 .show-detail{
-     position: absolute;
-     left: -20px;
-     width: 20px;
      display: flex;
      justify-content: center;
      align-items: center;
