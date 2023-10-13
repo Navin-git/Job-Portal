@@ -65,7 +65,7 @@
             </div>
           </div>
           <div>
-            <button class="outline-btn">Edit</button>
+            <!-- <button class="outline-btn">Edit</button> -->
           </div>
         </div>
         <div class="profile-form">
@@ -188,13 +188,13 @@
               readonly
             />
           </div>
-          <button
+          <!-- <button
             style="margin-left: auto"
             class="btn"
             onclick="handlesubmit()"
           >
             Submit
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
@@ -378,6 +378,7 @@
           if (data) {
             Name.value = data?.userDetails?.FullName || "";
             Email.value = data?.userDetails?.Email || "";
+            Phone.value = data?.userDetails?.Phone_number || "";
             DOB.value = data?.userDetails?.DOB || "";
             Address.value = data?.userDetails?.Address || "";
             Prefered_Salary.value = data?.userDetails?.Prefered_salary || "";
