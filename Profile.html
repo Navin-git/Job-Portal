@@ -340,8 +340,8 @@
           FullName: input.Name,
           Email: input.Email,
           PhoneNumber: input.Phone,
-          PreferedSalary: input.PreferedSalary,
-          Prefered_jobtype: input.Prefered_jobtype,
+          Prefered_Salary: input.Prefered_Salary,
+          Prefered_Job_Type: input.Prefered_Job_Type,
           Prefered_jobtitle: input.Prefered_jobtitle,
         },"PUT").then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
@@ -353,7 +353,7 @@
           skills: Skill_List,
         }).then((data) => {
           console.log(data); // JSON data parsed by `data.json()` call
-          window.location.reload();
+          // window.location.reload();
         },"POST");
       };
       let Skill_List = [];
