@@ -257,7 +257,6 @@
       let actId;
       const jobCard = document.getElementsByClassName("job-card");
       const jobDetail = document.getElementsByClassName("job-detail");
-      const showLess = document.getElementById("show-less");
       let isDetailOpen = false;
       // showLess.addEventListener("click", () => {
       //   isDetailOpen = false;
@@ -272,11 +271,6 @@
       //     showLess.style.display = "flex";
       //   });
       // }
-      if (isDetailOpen) {
-        showLess.style.display = "flex";
-      } else {
-        showLess.style.display = "none";
-      }
       const getDataById = async (id) => {
         try {
           const response = await fetch(
@@ -407,26 +401,14 @@
         getDataById(id);
         isDetailOpen = !isDetailOpen;
         jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
-        showLess.style.display = "flex";
       };
 
-      showLess.addEventListener("click", () => {
-        isDetailOpen = false;
-        jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
-        showLess.style.display = "none";
-      });
       for (let i = 0; i < jobCard.length; i++) {
         jobCard[i].addEventListener("click", () => {
           console.log(jobDetail);
           isDetailOpen = !isDetailOpen;
           jobDetail[0].style.width = isDetailOpen ? "50%" : 0;
-          showLess.style.display = "flex";
         });
-      }
-      if (isDetailOpen) {
-        showLess.style.display = "flex";
-      } else {
-        showLess.style.display = "none";
       }
 
       const getData = async () => {
@@ -454,6 +436,7 @@
               jobList.innerHTML += `  <div class="job-card"  onclick={handleOpen(${
                 item?.J_id
               })}>
+              <div id="show-less">close</div>
           <div
             style="
               display: flex;
