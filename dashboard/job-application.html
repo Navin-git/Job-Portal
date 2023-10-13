@@ -168,8 +168,9 @@
                  }
                 </div>
                 ${
-                  item?.Status === "rejected" &&
-                  `<button onclick="deleteD(${item?.A_id})" style="width: fit-content" class="btn">Delete</button>`
+                  item?.Status === "rejected"
+                    ? `<button onclick="deleteD(${item?.A_id})" style="width: fit-content" class="btn">Delete</button>`
+                    : ``
                 }
                 </div>
               </td>
