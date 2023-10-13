@@ -295,10 +295,9 @@
             ).innerHTML = ` <div class="job-detail">
           <button id="show-less" class="show-detail"><</button>
           <div
-            style="
-              overflow-y: scroll;
-              height: calc(100vh - 90px) !important;
-              padding: 80px 20px 20px 20px;
+            style="width: 50px; border-radius: 5px;  flex-shrink: 0 !important;
+                    height: 60px;
+                    object-fit: contain;
             "
           >
             <div
@@ -322,7 +321,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 3px">
                   <h4>${data?.jobDetails?.Company_name ?? ""}</h4>
-                  <p>${data?.jobDetails?.Job_Industry ?? ""}</p>
+                  <p>${data?.jobDetails?.Job_industry ?? ""}</p>
                   <p>${data?.jobDetails?.Main_address ?? ""}</p>
                 </div>
               </div>
@@ -355,7 +354,7 @@
                 flex-direction: column;
               "
             >
-              <p>${data?.jobDetails?.Job_Industry ?? ""}</p>
+              <p>${data?.jobDetails?.Job_industry ?? ""}</p>
             </div>
             <br />
             <h4>Job Roles</h4>
