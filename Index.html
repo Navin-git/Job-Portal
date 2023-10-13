@@ -273,6 +273,9 @@
       let showDetail = true;
       const handleclose = () => {
         showDetail = false;
+        document.getElementById("job-detail").style.width = showDetail
+          ? "100%"
+          : "0";
       };
       const getDataById = async (id) => {
         try {
@@ -297,10 +300,8 @@
           if (data) {
             document.getElementById(
               "job-detail"
-            ).innerHTML = ` <div style="width: ${
-              showDetail ? "100%" : "0"
-            }" class="job-detail">
-          <button onclick={handleclose()} class="show-detail">&#10005</button>
+            ).innerHTML = ` <div class="job-detail">
+          <button id="show-detail" onclick={handleclose()} class="show-detail">&#10005</button>
           <div
             style="
               overflow-y: scroll;
