@@ -359,11 +359,12 @@
           // Add any desired actions to be taken when Enter is pressed
         }
       }
-      const getData = async () => {
+
+      const GetEduDetails = async () => {
         let users = JSON.parse(localStorage?.getItem("user"));
         try {
           const response = await fetch(
-            `http://localhost:9000/userProfileByCompany?U_id=${users?.U_id}`,
+            `http://localhost:9000/GetEduDetails?U_id=${users?.U_id}`,
             {
               method: "GET",
               mode: "cors",
@@ -383,7 +384,104 @@
             U_name.innerHTML = data?.userDetails?.FullName || "";
             U_email.innerHTML = data?.userDetails?.Email || "";
             U_address.innerHTML = data?.userDetails?.Address || "";
+            Name.value = data?.userDetails?.FullName || "";
+            Email.value = data?.userDetails?.Email || "";
+            Phone.value = data?.userDetails?.Phone_number || "";
+            DOB.value = data?.userDetails?.DOB || "";
+            Address.value = data?.userDetails?.Address || "";
+            Prefered_Salary.value = data?.userDetails?.Prefered_salary || "";
+            Prefered_Job_Type.value =
+              data?.userDetails?.Prefered_Job_Type || "";
+            // Prefered_jobtitle.value = data?.userDetails?.Prefered_jobtitle || "";
+            School.value = data?.userDetails?.School_name || "";
+            School_Passout.value = data?.userDetails?.School_passoutyear || "";
+            PlussTwo.value = data?.userDetails?.College_name || "";
+            Passout.value = data?.userDetails?.College_passoutyear || "";
+            Skill_List = data?.userSkills
+              ?.filter((i) => i.SK_id)
+              .map((item) => {
+                SkillS.innerHTML += `<li>${item.Skills}</li>`;
+                return item.Skills;
+              });
+          }
+        } catch (err) {
+          // alert("An error occurred:", error);
+        }
+      };
+      
+      const GetSkills = async () => {
+        let users = JSON.parse(localStorage?.getItem("user"));
+        try {
+          const response = await fetch(
+            `http://localhost:9000/GetSkills?U_id=${users?.U_id}`,
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
 
+          const data = await response.json();
+          console.log(data);
+          if (data) {
+            U_name.innerHTML = data?.userDetails?.FullName || "";
+            U_email.innerHTML = data?.userDetails?.Email || "";
+            U_address.innerHTML = data?.userDetails?.Address || "";
+            Name.value = data?.userDetails?.FullName || "";
+            Email.value = data?.userDetails?.Email || "";
+            Phone.value = data?.userDetails?.Phone_number || "";
+            DOB.value = data?.userDetails?.DOB || "";
+            Address.value = data?.userDetails?.Address || "";
+            Prefered_Salary.value = data?.userDetails?.Prefered_salary || "";
+            Prefered_Job_Type.value =
+              data?.userDetails?.Prefered_Job_Type || "";
+            // Prefered_jobtitle.value = data?.userDetails?.Prefered_jobtitle || "";
+            School.value = data?.userDetails?.School_name || "";
+            School_Passout.value = data?.userDetails?.School_passoutyear || "";
+            PlussTwo.value = data?.userDetails?.College_name || "";
+            Passout.value = data?.userDetails?.College_passoutyear || "";
+            Skill_List = data?.userSkills
+              ?.filter((i) => i.SK_id)
+              .map((item) => {
+                SkillS.innerHTML += `<li>${item.Skills}</li>`;
+                return item.Skills;
+              });
+          }
+        } catch (err) {
+          // alert("An error occurred:", error);
+        }
+      };
+      
+      const getData = async () => {
+        let users = JSON.parse(localStorage?.getItem("user"));
+        try {
+          const response = await fetch(
+            `http://localhost:9000/Profile?U_id=${users?.U_id}`,
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+            }
+          );
+
+          const data = await response.json();
+          console.log(data);
+          if (data) {
+            U_name.innerHTML = data?.userDetails?.FullName || "";
+            U_email.innerHTML = data?.userDetails?.Email || "";
+            U_address.innerHTML = data?.userDetails?.Address || "";
             Name.value = data?.userDetails?.FullName || "";
             Email.value = data?.userDetails?.Email || "";
             Phone.value = data?.userDetails?.Phone_number || "";
@@ -410,6 +508,8 @@
       };
       if (JSON.parse(localStorage?.getItem("user"))?.U_id) {
         getData();
+        GetEduDetails();
+        GetSkills()
       } else window.location.pathname = "/Index.html";
     </script>
     <script src="../script/nav.js"></script>
